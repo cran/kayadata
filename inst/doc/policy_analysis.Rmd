@@ -1,0 +1,287 @@
+---
+title: "Example: Analysis of Emissions-Reduction Policy"
+author: "Jonathan Gilligan"
+date: "2018-10-19"
+bibliography: "policy_analysis.bib"
+csl: "american-political-science-association.csl"
+vignette: >
+  %\VignetteIndexEntry{Example: Analysis of Emissions-Reduction Policy}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+editor_options: 
+  chunk_output_type: console
+output: 
+  rmarkdown::html_vignette: default
+  rmarkdown::pdf_vignette: default
+---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# U.S. Nationally Defined Contribution to Paris Accord
+
+The United States's Nationally Determined Contribution (NDC) to the 
+2015 Paris climate accord committed to reducing greenhouse gas emissions 
+to 26--28% below 2005 levels by 2025 and
+with a longer-term target of reducing emissions to 80% below 2005 levels
+by 2050 [@us:indc.cover.note:2015].^[The Trump administration has announced
+its intention to withdraw from the Paris accord. The analysis in this vignette
+does not address that development and simply presents the implications of the 
+pledged contribution.]
+This vignette will compare what these goals imply for rates of 
+improving energy efficiency and transitioning from fossil fuels to clean energy
+sources.
+The methods will follow Roger Pielke, Jr.'s approach for both bottom-up and
+top-down analysis
+[@pielke:tcf:2010; @pielke:uk.decarbonization:2009; @pielke:japan.decarbonization:2009; @pielke:australia.decarbonization:2011].
+
+# Bottom-Up Analysis
+
+Pielke's analysis rely on the Kaya identity:
+$$
+F = P \times g \times e \times f,
+$$
+where 
+
+* _F_ is energy-related CO~2~ emissions (here, measured in billions of 
+metric tons), 
+* _P_ is the population in billions,
+* _g_ is per-capita GDP (here, measured in thousands of dollars), 
+* _e_ is the energy intensity of the economy (here, measured in quads of primary 
+  energy consumed per trillion dollars of 
+  GDP^[A quad is short for a quadrillion British Thermal Units.]),
+* and _f_ is the carbon intensity of the energy supply (here, measured in 
+  millions of metric tons of CO~2~ per quad).
+
+Pielke begins his bottom-up analysis by examining projections of future 
+population and per-capita GDP. In this vignette, I develop those projections
+not from demographic and economic models, but simply by extrapolating from
+recent trends.
+
+## Recent Trends in Population and GDP
+
+Begin by loading historical values of the Kaya identity parameters for the 
+United States:
+```{r load_data}
+suppressPackageStartupMessages({
+  library(magrittr)
+  library(dplyr)
+  library(stringr)
+  library(tidyr)
+  library(purrr)
+  library(broom)
+  library(knitr)
+  library(scales)
+  library(kayadata)
+})
+
+kaya <- get_kaya_data("United States")
+```
+Let's start by looking at trends in _P_, _g_, _e_, and _f_ starting in 1990. 
+I plot these with a log-scale on the y-axis because a constant growth rate
+produces exponential growth, so it should look linear on a semi-log plot.
+
+```{r plot_P_1990, fig.cap = str_c("Trend in population for U.S. from 1990--", max(kaya$year, na.rm = T))}
+plot_kaya(kaya, "P", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+  theme_bw()
+```
+
+```{r plot_g_1990, fig.cap = str_c("Trend in per-capita GDP for U.S. from 1990--", max(kaya$year, na.rm = T))}
+plot_kaya(kaya, "g", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+  theme_bw()
+```
+
+```{r plot_e_1990, fig.cap = str_c("Trend in primary-energy intensity of the U.S. economy from 1990--", max(kaya$year, na.rm = T))}
+plot_kaya(kaya, "e", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+  theme_bw()
+```
+
+```{r plot_f_1990, fig.cap = str_c("Trend in the carbon-dioxide intensity of the U.S. energy supply from 1990--", max(kaya$year, na.rm = T))}
+plot_kaya(kaya, "f", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+  theme_bw()
+```
+
+All of these trends look reasonable, except for _f_. Let's try _f_ again, but fitting the trend only since 2005:
+
+```{r plot_f_2005, fig.cap = str_c("Trend in the carbon-dioxide intensity of the U.S. energy supply from 2005--", max(kaya$year, na.rm = T))}
+plot_kaya(kaya, "f", log_scale = TRUE, start_year = 2005, trend_line = TRUE, points = FALSE) +
+  theme_bw()
+```
+
+That looks better. The abrupt changes in trend at 1990 and again at 2005 illustrate the difficulties of predicting future values by extrapolating from past trends, and indicates that the extrapolations we will use here should be taken with several grains of salt.
+
+### Historical Trends
+
+Now let's calculate the historical trends:
+```{r compute-bottom-up-rates}
+vars <- c("P", "g", "e", "f")
+historical_trends <- map_dbl(vars, 
+                 ~kaya %>% 
+                   gather(key = variable, value = value, -region, -year) %>%
+                   filter(variable == .x, 
+                          year >= ifelse(.x == "f", 2005, 1990)) %>%
+                   lm(log(value) ~ year, data = .) %>% tidy() %>%
+                   filter(term == "year") %$% estimate
+) %>% set_names(vars)
+
+tibble(Variable = names(historical_trends), 
+       Rate = map_chr(historical_trends, ~percent(.x, 0.01))) %>%
+  kable(align = c("c", "r"))
+```
+
+## Implied Decarbonization Rates
+
+Next, calculate the implied rate of change of _F_ under the policy. This is 
+not an extrapolation from history, but a pure implication of the policy goals:
+From the Kaya identity, $F = G \times e \times f$, so the rates of change are
+$r_F = r_G + r_e + r_f = r_G + r_{ef}$. 
+
+```{r implied_rate_F}
+ref_year <- 2005
+target_years <- c(2025, 2050)
+target_reduction <- c(0.26, 0.80)
+
+F_ref <- kaya %>% filter(year == ref_year) %$% F
+F_target <- tibble(year = target_years, F = F_ref * (1 - target_reduction)) %>%
+  mutate(implied_rate = log(F / F_ref) / (year - ref_year))
+
+F_target %>% 
+  mutate(implied_rate = map_chr(implied_rate, ~percent(.x,  0.01))) %>%
+  rename("Target F" = F, "Implied Rate" = implied_rate) %>%
+  kable(align = c("crr"), digits = 0)
+```
+
+For the bottom-up analysis of decarbonization, I will use $r_{ef}$,
+the implied rate of decarbonization of the economy, conditional on future
+economic growth following the historical trend. 
+This is expressed in the equation $r_{ef} = r_F - r_G$,
+where $r_F$ is the rate of emissions-reduction implied by the policy 
+(see above) and $r_G$ is the historical growth rate of GDP:
+
+```{r implied_decarb_bottom_up}
+implied_decarb_rates <- F_target %>% 
+  transmute(year, impl_F = implied_rate, 
+            hist_G = historical_trends['P'] + historical_trends['g'],
+            hist_ef = historical_trends['e'] + historical_trends['f'],
+            impl_ef = impl_F - hist_G)
+
+implied_decarb_rates %>% 
+  mutate_at(vars(starts_with("hist_"), starts_with("impl_")),
+            list(~map_chr(., ~percent(.x, 0.01)))) %>%
+  select(Year = year, 
+         "implied F" = impl_F, 
+         "historical G" = hist_G,
+         "implied ef" = impl_ef, 
+         "historical ef" = hist_ef
+  ) %>%
+  kable(align="rrrrr")
+```
+
+## Results
+
+To meet the goals for `r target_years[1]` would require increasing the rate
+of reducing _ef_ from 
+`r (100 * filter(implied_decarb_rates, year == target_years[1])$hist_ef) %>% 
+   formatC(format = "f", digits = 2)`% per year
+to 
+`r (100 * filter(implied_decarb_rates, year == target_years[1])$impl_ef) %>% 
+   formatC(format = "f", digits = 2)`% per year:
+`r filter(implied_decarb_rates, year == target_years[1]) %>% 
+         transmute(ratio = impl_ef / hist_ef) %$% ratio %>%
+   formatC(format = "f", digits = 1)` times faster.
+  
+
+To meet the goals for `r target_years[2]` would require increasing the rate
+of reducing _ef_ from 
+`r (100 * filter(implied_decarb_rates, year == target_years[2])$hist_ef) %>% 
+   formatC(format = "f", digits = 2)`% per year
+to 
+`r (100 * filter(implied_decarb_rates, year == target_years[2])$impl_ef) %>% 
+   formatC(format = "f", digits = 2)`% per year:
+`r filter(implied_decarb_rates, year == target_years[2]) %>% 
+         transmute(ratio = impl_ef / hist_ef) %$% ratio %>%
+   formatC(format = "f", digits = 1)` times faster.
+
+# Top-Down Analysis
+
+The top-down analysis is very similar to the bottom-up analysis, but instead
+of looking at the elements of the Kaya identity individually, we use 
+predictions from macroeconomic integrated assessment models that consider 
+interactions between population, GDP, and energy use to predict future energy
+demand:
+```{r top_down_trends}
+top_down_trends <- get_top_down_trends("United States")
+
+top_down_trends %>% select(P, G, E) %>%
+  mutate_all(list(~map_chr(., ~percent(.x, 0.01)))) %>%
+  rename("P trend" = P, "G trend" = G, "E trend" = E) %>%
+  kable(align="rrr")
+```
+
+## Implied Decarbonization
+
+In the bottom-up analysis, we calculated the implied rate of decarbonizing the
+economy by comparing the rate of emissions reduction implied by the policy
+($r_F$) to the 
+predicted rate of change of GDP ($r_G$).
+Here, in the top-down analysis, we calculate the implied rate of decarbonizing
+the energy supply ($r_f$) by comparing the rate of emissions-reduction implied
+by policy ($r_F$) to the predicted rate of growth of energy demand ($r_E$):
+$F = E \times f$, so $r_F = r_E + r_f$, which we rearrange to find that
+$r_f = r_F - r_E$.
+```{r implied_decarb_top_down}
+implied_decarb_rates_top_down <- F_target %>% 
+  transmute(year, impl_F = implied_rate, 
+            top_down_E = top_down_trends$E,
+            hist_f = historical_trends['f'],
+            impl_f = impl_F - top_down_E)
+
+implied_decarb_rates_top_down %>% 
+  mutate_at(vars(starts_with("hist_"), starts_with("impl_"), 
+                 starts_with("top_down")),
+            list(~map_chr(., ~percent(.x, 0.01)))) %>%
+  select(Year = year, 
+         "implied F" = impl_F, 
+         "top-down E" = top_down_E,
+         "implied f" = impl_f, 
+         "historical f" = hist_f
+  ) %>%
+  kable(align="rrrrr")
+```
+
+## Results
+
+To meet the goals for `r target_years[1]` would require increasing the rate
+of reducing _f_ from 
+`r (100 * filter(implied_decarb_rates_top_down, 
+                 year == target_years[1])$hist_f) %>% 
+   formatC(format = "f", digits = 2)`% per year
+to 
+`r (100 * filter(implied_decarb_rates_top_down, 
+                 year == target_years[1])$impl_f) %>% 
+   formatC(format = "f", digits = 2)`% per year:
+`r filter(implied_decarb_rates_top_down, 
+          year == target_years[1]) %>% 
+         transmute(ratio = impl_f / hist_f) %$% ratio %>%
+   formatC(format = "f", digits = 1)` times faster.
+  
+
+To meet the goals for `r target_years[2]` would require increasing the rate
+of reducing _f_ from 
+`r (100 * filter(implied_decarb_rates_top_down, 
+                 year == target_years[2])$hist_f) %>% 
+   formatC(format = "f", digits = 2)`% per year
+to 
+`r (100 * filter(implied_decarb_rates_top_down, 
+                 year == target_years[2])$impl_f) %>% 
+   formatC(format = "f", digits = 2)`% per year:
+`r filter(implied_decarb_rates_top_down, 
+          year == target_years[2]) %>% 
+         transmute(ratio = impl_f / hist_f) %$% ratio %>%
+   formatC(format = "f", digits = 1)` times faster.
+  
+# References
+
