@@ -30,8 +30,8 @@ gc
 }
 \references{
 Environmental Protection Agency (2018) "Electric Power Monthly,"
-(October 2018) <https://www.eia.gov/electricity/monthly/current_month/epm.pdf>,
-\href{Table 6.7.A}{https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_07_a}.
+(October 2018) \url{https://www.eia.gov/electricity/monthly/current_month/epm.pdf},
+\href{https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_07_a}{Table 6.7.A}.
 
 Pielke, Jr., Roger A., \emph{The Climate Fix} (Basic Books, 2010).
 }

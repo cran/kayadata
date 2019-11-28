@@ -4,8 +4,7 @@
 \alias{lookup_region_code}
 \title{Look up country or region name from code}
 \usage{
-lookup_region_code(region_code, data = kayadata::kaya_data,
-  quiet = FALSE)
+lookup_region_code(region_code, data = kayadata::kaya_data, quiet = FALSE)
 }
 \arguments{
 \item{region_code}{The three-letter country or region code}

@@ -7,7 +7,7 @@
 # FITNESS FOR A PARTICULAR PURPOSE.  See the MIT License for more details.
 #
 # You should have received a copy of the MIT License along with this program; if
-# not, see <https://opensource.org/licenses/MIT>.
+# not, see \url{https://opensource.org/licenses/MIT}.
 
 #' kayadata package
 #'
@@ -20,11 +20,11 @@
 #' Nakicenovic, Nebojsa, and Rob Swart (Eds.),
 #' \emph{Special Report on Emissions Scenarios}
 #' (Cambridge University Press, 2000).
-#' <https://www.ipcc.ch/report/emissions-scenarios/>
+#' \url{https://www.ipcc.ch/report/emissions-scenarios/}
 #'
 #' Raupach, Michael R., \emph{et al.}, "Global and regional drivers of accelerating
 #' CO2 emissions," PNAS \strong{104}, 10288--10293 (2007)
-#' \href{https://doi.org/10.1073/pnas.0700609104}{doi: 10.1073/pnas.0700609104}.
+#' \href{https://doi.org/10.1073/pnas.0700609104}{doi: \code{10.1073/pnas.0700609104}}.
 #'
 #' @description
 #'
@@ -43,8 +43,8 @@
 #' Raupach \emph{et al}, 2007)
 #'
 #'
-#' The data in this packages covers 1960-2017 for population and GDP, and
-#' 1965-2017 for energy and fossil-fuel CO2 emissions.
+#' The data in this packages covers 1960-2018 for population and GDP, and
+#' 1965-2018 for energy and fossil-fuel CO2 emissions.
 #'
 #' The package uses data on population and GDP from the World Bank,
 #' using market exchange rates (MER) for GDP because those data go back to
@@ -55,7 +55,7 @@
 #'
 #' The package uses data on energy consumption and fossil-fuel CO2 emissions
 #' from the
-#' \href{https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html}{2018 BP Statistical Review of World Energy}
+#' \href{https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html}{2019 BP Statistical Review of World Energy}
 #'
 #' @section License:
 #'

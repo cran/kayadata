@@ -4,8 +4,12 @@
 \alias{get_kaya_data}
 \title{Get Kaya data for a country or region}
 \usage{
-get_kaya_data(region_name, gdp = c("MER", "PPP"), quiet = FALSE,
-  region_code = NULL)
+get_kaya_data(
+  region_name,
+  gdp = c("MER", "PPP"),
+  quiet = FALSE,
+  region_code = NULL
+)
 }
 \arguments{
 \item{region_name}{The name of a country or region to look up}

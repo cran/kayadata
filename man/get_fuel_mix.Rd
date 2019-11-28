@@ -4,8 +4,12 @@
 \alias{get_fuel_mix}
 \title{Get fuel mix for a country or region}
 \usage{
-get_fuel_mix(region_name, collapse_renewables = TRUE, quiet = FALSE,
-  region_code = NULL)
+get_fuel_mix(
+  region_name,
+  collapse_renewables = TRUE,
+  quiet = FALSE,
+  region_code = NULL
+)
 }
 \arguments{
 \item{region_name}{The name of a country or region to look up}

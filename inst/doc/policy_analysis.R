@@ -1,11 +1,11 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   echo = TRUE,
   collapse = TRUE,
   comment = "#>"
 )
 
-## ----load_data-----------------------------------------------------------
+## ----load_data----------------------------------------------------------------
 suppressPackageStartupMessages({
   library(magrittr)
   library(dplyr)
@@ -40,7 +40,7 @@ plot_kaya(kaya, "f", log_scale = TRUE, start_year = 1990, trend_line = TRUE, poi
 plot_kaya(kaya, "f", log_scale = TRUE, start_year = 2005, trend_line = TRUE, points = FALSE) +
   theme_bw()
 
-## ----compute-bottom-up-rates---------------------------------------------
+## ----compute-bottom-up-rates--------------------------------------------------
 vars <- c("P", "g", "e", "f")
 historical_trends <- map_dbl(vars, 
                  ~kaya %>% 
@@ -55,7 +55,7 @@ tibble(Variable = names(historical_trends),
        Rate = map_chr(historical_trends, ~percent(.x, 0.01))) %>%
   kable(align = c("c", "r"))
 
-## ----implied_rate_F------------------------------------------------------
+## ----implied_rate_F-----------------------------------------------------------
 ref_year <- 2005
 target_years <- c(2025, 2050)
 target_reduction <- c(0.26, 0.80)
@@ -69,7 +69,7 @@ F_target %>%
   rename("Target F" = F, "Implied Rate" = implied_rate) %>%
   kable(align = c("crr"), digits = 0)
 
-## ----implied_decarb_bottom_up--------------------------------------------
+## ----implied_decarb_bottom_up-------------------------------------------------
 implied_decarb_rates <- F_target %>% 
   transmute(year, impl_F = implied_rate, 
             hist_G = historical_trends['P'] + historical_trends['g'],
@@ -87,7 +87,7 @@ implied_decarb_rates %>%
   ) %>%
   kable(align="rrrrr")
 
-## ----top_down_trends-----------------------------------------------------
+## ----top_down_trends----------------------------------------------------------
 top_down_trends <- get_top_down_trends("United States")
 
 top_down_trends %>% select(P, G, E) %>%
@@ -95,7 +95,7 @@ top_down_trends %>% select(P, G, E) %>%
   rename("P trend" = P, "G trend" = G, "E trend" = E) %>%
   kable(align="rrr")
 
-## ----implied_decarb_top_down---------------------------------------------
+## ----implied_decarb_top_down--------------------------------------------------
 implied_decarb_rates_top_down <- F_target %>% 
   transmute(year, impl_F = implied_rate, 
             top_down_E = top_down_trends$E,

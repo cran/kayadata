@@ -1,6 +1,6 @@
 #' Conversion factor: quads per MTOE
 #' @keywords internal
-mtoe = 1 / 25.2 # quads
+mtoe <- 1 / 25.2 # quads
 
 globalVariables(c("fuel_mix", "kaya_data", "region", "region_code",
                   "geography", "year", "P", "G", "E", "F", "g", "e", "f", "ef",
@@ -16,13 +16,14 @@ globalVariables(c("fuel_mix", "kaya_data", "region", "region_code",
 #'         such country or region
 #' @keywords internal
 #' @importFrom magrittr %>% %$%
-lookup_region_code <- function(region_code, data = kayadata::kaya_data, quiet = FALSE) {
+lookup_region_code <- function(region_code, data = kayadata::kaya_data,
+                               quiet = FALSE) {
   region_name <- data %>%
     dplyr::select(region, region_code) %>% dplyr::distinct() %>%
     dplyr::filter(region_code %in% (!!region_code)) %$% region %>%
     as.character()
   if (is.null(region_name) || length(region_name) == 0) {
-    region_name = NULL
+    region_name <- NULL
     if (!quiet) {
       warning("There is no country or region with code ", region_code, ".")
     }
@@ -93,11 +94,11 @@ kaya_region_list <- function() {
 #' @export
 get_kaya_data <- function(region_name, gdp = c("MER", "PPP"), quiet = FALSE,
                           region_code = NULL) {
-  gdp = match.arg(gdp)
+  gdp <- match.arg(gdp)
   if (! is.null(region_code)) {
     region_name <- lookup_region_code(region_code)
     if (is.null(region_name)) {
-      region_name = ""
+      region_name <- ""
     }
   }
 
@@ -144,7 +145,7 @@ get_fuel_mix <- function(region_name, collapse_renewables = TRUE,
     region_name <- lookup_region_code(region_code,
                                       kayadata::fuel_mix)
     if (is.null(region_name) || length(region_name) == 0) {
-      region_name = ""
+      region_name <- ""
     }
   }
   data <- kayadata::fuel_mix %>%
@@ -193,7 +194,7 @@ get_top_down_trends <- function(region_name, quiet = FALSE,
     region_name <- lookup_region_code(region_code,
                                       kayadata::td_trends)
     if (is.null(region_name) || length(region_name) == 0) {
-      region_name = ""
+      region_name <- ""
     }
   }
   data <- kayadata::td_trends %>%
@@ -244,17 +245,18 @@ get_top_down_trends <- function(region_name, quiet = FALSE,
 #' get_top_down_values(region_code = "PAK")
 #'
 #' @export
-get_top_down_values <- function(region_name, quiet = FALSE, region_code = NULL) {
+get_top_down_values <- function(region_name, quiet = FALSE,
+                                region_code = NULL) {
   if (! is.null(region_code)) {
     region_name <- lookup_region_code(region_code,
                                       kayadata::td_values)
     if (is.null(region_name) || length(region_name) == 0) {
-      region_name = ""
+      region_name <- ""
     }
   }
   data <- kayadata::td_values %>%
     dplyr::filter(region %in% region_name) %>%
-    dplyr::mutate(g = G/P, e = E/G, f = F/E, ef = F/G) %>%
+    dplyr::mutate(g = G / P, e = E / G, f = F / E, ef = F / G) %>%
     dplyr::select(region, year, P, G, g, E, F, e, f, ef)
   if (nrow(data) == 0 && is.null(region_code)) {
     if (!quiet) {
@@ -301,16 +303,17 @@ get_top_down_values <- function(region_name, quiet = FALSE, region_code = NULL) 
 #' project_top_down("China", 2037)
 #' project_top_down(region_code = "VNM", year = 2043)
 #' @export
-project_top_down <- function(region_name, year, quiet = FALSE, region_code = NULL) {
+project_top_down <- function(region_name, year, quiet = FALSE,
+                             region_code = NULL) {
   if (! is.null(region_code)) {
     region_name <- lookup_region_code(region_code,
                                       kayadata::td_values)
     if (is.null(region_name) || length(region_name) == 0) {
-      region_name = ""
+      region_name <- ""
     }
   }
-  if (year < min(kayadata::td_values$year, na.rm=T) ||
-      year > max(kayadata::td_values$year, na.rm=T)) {
+  if (year < min(kayadata::td_values$year, na.rm = T) ||
+      year > max(kayadata::td_values$year, na.rm = T)) {
     stop("Projecting top-down values only works for year betweeen ",
          min(kayadata::td_values$year, na.rm = T), " and ",
          max(kayadata::td_values$year, na.rm = T), ".")
@@ -321,8 +324,6 @@ project_top_down <- function(region_name, year, quiet = FALSE, region_code = NUL
     dplyr::filter(region %in% region_name) %>%
     dplyr::select(-region_code, -geography) %>%
     dplyr::group_by(region) %>%
-    # dplyr::summarize_at(vars(-year),
-    #                     list(~approx(x = year, y = ., xout = (!!year))$y)) %>%
     dplyr::summarize_at(vars(-year),
                         list(~approx(x = year, y = ., xout = ytmp)$y)) %>%
     dplyr::ungroup() %>%
@@ -375,8 +376,8 @@ emissions_factors <- function() {
 #' gc
 #' @references
 #' Environmental Protection Agency (2018) "Electric Power Monthly,"
-#' (October 2018) <https://www.eia.gov/electricity/monthly/current_month/epm.pdf>,
-#' \href{Table 6.7.A}{https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_07_a}.
+#' (October 2018) \url{https://www.eia.gov/electricity/monthly/current_month/epm.pdf},
+#' \href{https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_07_a}{Table 6.7.A}.
 #'
 #' Pielke, Jr., Roger A., \emph{The Climate Fix} (Basic Books, 2010).
 #' @export

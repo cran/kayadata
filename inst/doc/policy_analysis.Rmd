@@ -1,13 +1,13 @@
 ---
 title: "Example: Analysis of Emissions-Reduction Policy"
 author: "Jonathan Gilligan"
-date: "2018-10-19"
+date: "2019-07-31"
 bibliography: "policy_analysis.bib"
 csl: "american-political-science-association.csl"
 vignette: >
+  %\VignetteEncoding{UTF-8}
   %\VignetteIndexEntry{Example: Analysis of Emissions-Reduction Policy}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 editor_options: 
   chunk_output_type: console
 output: 

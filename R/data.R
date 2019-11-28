@@ -3,7 +3,7 @@
 #' A dataset containing Kaya identity parameters
 #' P, G, E, F, g, e, f, and ef for many countries
 #'
-#' @format A tibble containing 13163 rows and 13 variables:
+#' @format A tibble containing 5133 rows and 14 variables:
 #' \describe{
 #'   \item{region}{Country or region name}
 #'   \item{region_code}{Three-letter country or region code}
@@ -57,7 +57,7 @@
 #' A dataset containing top-down projections of P, G, and E, from the
 #' EIA's International Energy Outlook 2017.
 #'
-#' @format A tibble containing 1752 rows and 12 variables
+#' @format A tibble containing 648 rows and 12 variables
 #' \describe{
 #'   \item{region}{Country or region name}
 #'   \item{region_code}{Three-letter country or region code}
@@ -82,7 +82,7 @@
 #' A dataset containing top-down projections of trends in P, G, and E,
 #' from the EIA's International Energy Outlook 2017.
 #'
-#' @format A tibble containing 221 rows and 11 variables
+#' @format A tibble containing 226 rows and 11 variables
 #' \describe{
 #'   \item{region}{Country or region name}
 #'   \item{region_code}{Three-letter country or region code}

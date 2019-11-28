@@ -34,23 +34,23 @@ plot_kaya <- function(kaya_data, variable,
                       y_lab = NULL,
                       log_scale = FALSE, trend_line = FALSE,
                       points = TRUE, font_size = 20) {
-  labels <- c(P =  'Population (billions)',
-              G =  'Gross Domestic Product ($ trillion)',
-              E =  'Energy consumption (quads)',
-              F =  'Fossil-fuel carbon emissions (million metric tons)',
-              g =  'Per-capita GDP ($ thousand)',
-              e =  'Energy intensity of economy (quads per $trillion)',
-              f =  'Carbon intensity of energy supply (MMT per quad)',
-              ef = 'Carbon intensity of economy (tons CO2 per $million)'
+  labels <- c(P =  "Population (billions)",
+              G =  "Gross Domestic Product ($ trillion)",
+              E =  "Energy consumption (quads)",
+              F =  "Fossil-fuel carbon emissions (million metric tons)",
+              g =  "Per-capita GDP ($ thousand)",
+              e =  "Energy intensity of economy (quads per $trillion)",
+              f =  "Carbon intensity of energy supply (MMT per quad)",
+              ef = "Carbon intensity of economy (tons CO2 per $million)"
   )
 
   if (is.null(y_lab)) y_lab <- labels[variable]
   if (is.null(start_year) || is.null(stop_year)) {
-    start_year = NULL
-    stop_year = NULL
+    start_year <- NULL
+    stop_year <- NULL
   } else {
-    if (is.na(start_year)) start_year = 1980
-    if (is.na(stop_year)) stop_year = max(kaya_data$year)
+    if (is.na(start_year)) start_year <- 1980
+    if (is.na(stop_year)) stop_year <-  max(kaya_data$year)
   }
 
   se <- FALSE
@@ -63,7 +63,7 @@ plot_kaya <- function(kaya_data, variable,
       trend_line <- FALSE
       se <- FALSE
     } else {
-      if (trend_line %in% c("SE","SE:TRUE","SE:T")) {
+      if (trend_line %in% c("SE", "SE:TRUE", "SE:T")) {
         trend_line <- TRUE
         se <- TRUE
       } else {
@@ -75,12 +75,12 @@ plot_kaya <- function(kaya_data, variable,
     }
   }
 
-  color_scale = scale_color_manual(values = c("TRUE" = "dark blue",
+  color_scale <- scale_color_manual(values = c("TRUE" = "dark blue",
                                               "PRE" = "cornflowerblue",
                                               "POST" = "cornflowerblue",
                                               "TREND" = "orchid4"
   ))
-  legend = guides(color = FALSE, shape = FALSE)
+  legend <- guides(color = FALSE, shape = FALSE)
 
   if (!any(is.null(start_year), is.null(stop_year))) {
     df <- bind_rows(
@@ -115,8 +115,8 @@ plot_kaya <- function(kaya_data, variable,
   p <- p +
     labs(x = "Year", y = y_lab) +
     theme_bw(base_size = font_size) +
-    theme(axis.title.y = element_text(vjust=1.2),
-          axis.title.x = element_text(vjust=-0.1),
+    theme(axis.title.y = element_text(vjust = 1.2),
+          axis.title.x = element_text(vjust = -0.1),
           legend.key = element_rect(color = NA))
   p
 }
@@ -148,7 +148,7 @@ plot_fuel_mix <- function(fuel_mix, collapse_renewables = TRUE, title = NULL) {
   if (is.null(title) || title == TRUE) {
     title <- fuel_mix$region %>% unique() %>% str_c(collapse = ", ")
   } else if (!is.character(title)) {
-    title = NULL
+    title <- NULL
   }
   if (collapse_renewables) {
     fuel_mix <- fuel_mix %>%
@@ -168,25 +168,25 @@ plot_fuel_mix <- function(fuel_mix, collapse_renewables = TRUE, title = NULL) {
     summarize(quads = sum(quads), frac = sum(frac)) %>% ungroup()
   fd <- fuel_mix %>%
     arrange(fuel) %>%
-    mutate(qmin = cumsum(lag(quads, default=0)), qmax = cumsum(quads))
-  labels <- fd %>% mutate(label = paste0(fuel, ": ", round(quads,2),
+    mutate(qmin = cumsum(lag(quads, default = 0)), qmax = cumsum(quads))
+  labels <- fd %>% mutate(label = paste0(fuel, ": ", round(quads, 2),
                                          " quads (", scales::percent(frac, 0.1),
                                          ")")) %>%
     arrange(fuel) %>% select(fuel, label) %>%
     tidyr::spread(key = fuel, value = label) %>% unlist()
   if (FALSE) {
-    message(paste0(levels(fd$fuel), collapse=", "))
+    message(paste0(levels(fd$fuel), collapse = ", "))
   }
   p <- ggplot(fd, aes(ymin = qmin, ymax = qmax, fill = fuel)) +
     geom_rect(xmin = 2, xmax = 4, na.rm = TRUE) +
     coord_polar(theta = "y") +
-    xlim(c(0,4)) +
+    xlim(c(0, 4)) +
     scale_fill_manual(values = color_scale,
                       breaks = names(labels), labels = labels, name = "Fuel") +
     theme_bw(base_size = 20) +
-    theme(panel.grid=element_blank(),
-          axis.text=element_blank(),
-          axis.ticks=element_blank())
+    theme(panel.grid = element_blank(),
+          axis.text = element_blank(),
+          axis.ticks = element_blank())
 
   if (! is.null(title)) p <- p + ggtitle(title)
   p

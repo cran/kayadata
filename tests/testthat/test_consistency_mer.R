@@ -1,8 +1,8 @@
 context("Consistency (MER)")
 
-none.na = function(...) {
-  lst = list(...)
-  f = function(x, y) x & ! is.na(y)
+none.na <- function(...) {
+  lst <- list(...)
+  f <- function(x, y) x & ! is.na(y)
   purrr::reduce(lst, f, .init = TRUE)
 }
 

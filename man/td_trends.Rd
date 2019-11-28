@@ -4,7 +4,7 @@
 \name{td_trends}
 \alias{td_trends}
 \title{Top-down projections of trends in Kaya variables for many countries and regions}
-\format{A tibble containing 221 rows and 11 variables
+\format{A tibble containing 226 rows and 11 variables
 \describe{
   \item{region}{Country or region name}
   \item{region_code}{Three-letter country or region code}
