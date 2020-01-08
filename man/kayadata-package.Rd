@@ -19,7 +19,6 @@ per-capita GDP, \emph{e} is the energy intensity of the economy, and
 \href{https://www.ipcc.ch/report/emissions-scenarios/}{Ch. 3, p. 105};
 Raupach \emph{et al}, 2007)
 
-
 The data in this packages covers 1960-2018 for population and GDP, and
 1965-2018 for energy and fossil-fuel CO2 emissions.
 
@@ -37,20 +36,20 @@ from the
 \section{License}{
 
 
- The \pkg{kayadata} package is open source licensed under the
- MIT License.
+The \pkg{kayadata} package is open source licensed under the
+MIT License.
 }
 
 \section{Bug reports}{
 
 \itemize{
- \item kayadata issue tracker (\url{https://github.com/jonathan-g/kayadata/issues})
+\item kayadata issue tracker (\url{https://github.com/jonathan-g/kayadata/issues})
 }
 }
 
 \references{
-Kaya, Yoichi and Keiichi Yokobori, _Environment, Energy, and Economy:
-Strategies for Sustainability_ (United Nations University Press, 1998).
+Kaya, Yoichi and Keiichi Yokobori, \emph{Environment, Energy, and Economy:
+Strategies for Sustainability} (United Nations University Press, 1998).
 
 Nakicenovic, Nebojsa, and Rob Swart (Eds.),
 \emph{Special Report on Emissions Scenarios}

@@ -1,0 +1,85 @@
+---
+title: "Getting Started with the kayadata Package"
+author: "Jonathan Gilligan"
+date: "2019-12-21"
+vignette: >
+  %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{Getting Started with the kayadata Package}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+output: 
+  rmarkdown::html_vignette: default
+  rmarkdown::pdf_vignette: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(kayadata)
+```
+# kayadata
+
+This package loads Kaya-identity data, synthesized from several sources.
+
+To install and load the package, first install either the `pacman` or `devtools` 
+package from CRAN:
+```{r initialize, echo=TRUE, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("jonathan-g/kayadata")
+library(kayadata)
+```
+or
+```{r initialize-pacman, echo=TRUE, eval=FALSE}
+install.packages("pacman")
+library(pacman)
+p_load_gh("jonathan-g/kayadata")
+```
+
+Once you've installed it, then you just need to use the command 
+`library(kayadata)` to load the package.
+
+Some of the functions the package provides are:
+
+* `kaya_region_list()`: Get a list of available countries and regions.
+* `get_kaya_data()`: Get data for a specific country. 
+  Example: 
+```{r get-kaya-data, echo=TRUE}
+mexico_data = get_kaya_data("Mexico") 
+mexico_data %>% filter(year >= 1965) %>% 
+  select(region:ef) %>%
+  head()
+```
+* `project_top_down()`: Project future population, GDP, energy use, and 
+  emissions. 
+  Example: 
+```{r project-top-down, echo=TRUE}
+mexico_2050 = project_top_down("Mexico", 2050)
+mexico_2050
+```
+* `plot_kaya`: Plot trends in Kaya variables for a given region or country.
+  Example:
+```{r plot-kaya, echo=TRUE}
+us_kaya = get_kaya_data("United States")
+plot_kaya(us_kaya, "ef", y_lab = "Carbon intensity of economy",
+          start_year = 2000, stop_year = 2010, log_scale = TRUE,
+          trend_line = TRUE)
+```
+```{r plot-kaya-world, echo=TRUE}
+world_kaya = get_kaya_data("World")
+plot_kaya(world_kaya, "P", start_year = 2000, stop_year = 2010, log_scale = FALSE,
+          trend_line = FALSE)
+```
+* `get_fuel_mix`: Get the fuel mix (coal, gas, oil, nuclear, and renewables) 
+  for a region or country. 
+  Example: 
+```{r get-fuel-mix, echo=TRUE}
+mexico_mix = get_fuel_mix("Mexico")
+mexico_mix
+```
+* `plot_fuel_mix`: Plot the fuel mix in a donut chart
+```{r plot-fuel-mix, echo=TRUE}
+plot_fuel_mix(mexico_mix)
+```
+
+After you install the package, you can get more help inside RStudio by typing 
+`help(package="kayadata")` in the R console window.

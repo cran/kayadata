@@ -3,27 +3,27 @@
 \docType{data}
 \name{kaya_data}
 \alias{kaya_data}
-\title{Kaya identity data for many countries}
+\title{Kaya identity data for many countries and regions}
 \format{A tibble containing 5133 rows and 14 variables:
 \describe{
-  \item{region}{Country or region name}
-  \item{region_code}{Three-letter country or region code}
-  \item{geography}{Geographic category: "nation", "region", or "world"}
-  \item{year}{The year}
-  \item{P}{Population, in billions}
-  \item{G}{Gross domestic product, in trillions of constant 2010 U.S. dollars.}
-  \item{E}{Total primary energy consumption, in quads}
-  \item{F}{CO2 emissions from fossil fuel consumption, in millions of tons}
-  \item{g}{Per-capita GDP, in thousands of constant 2010 U.S. dollars per person.}
-  \item{e}{Energy intensity of the economy, in quads per trillion dollars.}
-  \item{f}{Emissions intensity of the energy supply, in million metric tons
-           per quad.}
-  \item{ef}{Emissions intensity of the economy, in metric tons per
-            million dollars of GDP.}
-  \item{G_ppp}{Gross domestic product adjusted for purchasing power parity,
-               in trillions of constant 2011 international dollars}
-  \item{G_mer}{Gross domestic product at market-exchange-rate,
-               in trillions of constant 2010 U.S. dollars}
+\item{region}{Country or region name}
+\item{region_code}{Three-letter country or region code}
+\item{geography}{Geographic category: "nation", "region", or "world"}
+\item{year}{The year}
+\item{P}{Population, in billions}
+\item{G}{Gross domestic product, in trillions of constant 2010 U.S. dollars.}
+\item{E}{Total primary energy consumption, in quads}
+\item{F}{CO2 emissions from fossil fuel consumption, in millions of tons}
+\item{g}{Per-capita GDP, in thousands of constant 2010 U.S. dollars per person.}
+\item{e}{Energy intensity of the economy, in quads per trillion dollars.}
+\item{f}{Emissions intensity of the energy supply, in million metric tons
+per quad.}
+\item{ef}{Emissions intensity of the economy, in metric tons per
+million dollars of GDP.}
+\item{G_ppp}{Gross domestic product adjusted for purchasing power parity,
+in trillions of constant 2011 international dollars}
+\item{G_mer}{Gross domestic product at market-exchange-rate,
+in trillions of constant 2010 U.S. dollars}
 }}
 \source{
 \url{https://data.worldbank.org/indicator/SP.POP.TOTL},

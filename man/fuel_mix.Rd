@@ -3,19 +3,20 @@
 \docType{data}
 \name{fuel_mix}
 \alias{fuel_mix}
-\title{Mix of fuels contributing to primary energy supply for many countries}
+\title{Mix of fuels contributing to primary energy supply for many countries and
+regions}
 \format{A tibble containing 936 rows and 7 variables
 \describe{
-  \item{region}{Country or region name}
-  \item{region_code}{Three-letter country or region code}
-  \item{geography}{Geographic category: "nation", "region", or "world"}
-  \item{year}{The year}
-  \item{fuel}{The fuel: "Coal", "Natural Gas", "Oil", "Nuclear", "Hydro",
-              and "Renewables"}
-  \item{quads}{The number of quads of that fuel consumed in the given country
-               or region and year}
-  \item{frac}{The fraction of that country or region's total primary
-             energy consumption from the fuel}
+\item{region}{Country or region name}
+\item{region_code}{Three-letter country or region code}
+\item{geography}{Geographic category: "nation", "region", or "world"}
+\item{year}{The year}
+\item{fuel}{The fuel: "Coal", "Natural Gas", "Oil", "Nuclear", "Hydro",
+and "Renewables"}
+\item{quads}{The number of quads of that fuel consumed in the given country
+or region and year}
+\item{frac}{The fraction of that country or region's total primary
+energy consumption from the fuel}
 }}
 \source{
 \url{https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy/downloads.html}

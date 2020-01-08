@@ -8,7 +8,7 @@ emissions_factors()
 }
 \value{
 a tibble of values for emissions factors, in million metric
-        tons of carbon dioxide per quad of energy.
+tons of carbon dioxide per quad of energy.
 }
 \description{
 Get emission factors for different energy sources

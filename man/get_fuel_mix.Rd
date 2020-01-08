@@ -2,7 +2,7 @@
 % Please edit documentation in R/kaya.R
 \name{get_fuel_mix}
 \alias{get_fuel_mix}
-\title{Get fuel mix for a country or region}
+\title{Get fuel mix for one or more countries or regions}
 \usage{
 get_fuel_mix(
   region_name,
@@ -12,24 +12,34 @@ get_fuel_mix(
 )
 }
 \arguments{
-\item{region_name}{The name of a country or region to look up}
+\item{region_name}{A character vector with the names of one or more
+countries or regions to look up}
 
-\item{collapse_renewables}{Combine hydroelectricity and other renewables into
-a single category.}
+\item{collapse_renewables}{Combine hydroelectricity and other renewables
+into a single category.}
 
 \item{quiet}{Suppress warnings if there is no data for that country or
 region.}
 
-\item{region_code}{Optional three-letter country or region code to look up
-instead of the `region_name`}
+\item{region_code}{Optional three-letter country or region codes to look up
+instead of the \code{region_name}}
 }
 \value{
-a tibble of fuel mix for the country or region.
-  That is, the number of quads of each fuel and the
-  fraction of total primary energy coming from that fuel.
+A tibble of fuel mix for the countries or regions specified.
+That is, the number of quads of each fuel and the
+fraction of total primary energy coming from that fuel for each country
+or region:
+\describe{
+\item{region}{The name of the country or region}
+\item{year}{The year reported}
+\item{fuel}{The name of the fuel}
+\item{quads}{The number of quads per year the country or region consumes}
+\item{frac}{The fraction of the country's energy that comes from that
+fuel}
+}
 }
 \description{
-Get fuel mix for a country or region
+Get fuel mix for one or more countries or regions
 }
 \examples{
 get_fuel_mix("United States")

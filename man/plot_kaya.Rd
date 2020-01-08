@@ -13,7 +13,12 @@ plot_kaya(
   log_scale = FALSE,
   trend_line = FALSE,
   points = TRUE,
-  font_size = 20
+  font_size = 20,
+  colors = NULL,
+  pre_color = NULL,
+  post_color = NULL,
+  in_range_color = NULL,
+  trend_color = NULL
 )
 }
 \arguments{
@@ -38,6 +43,22 @@ highlighting.}
 \item{points}{Plot points in addition to the line.}
 
 \item{font_size}{Base size of the font for axis labels and titles.}
+
+\item{colors}{Named vector of colors to use for the plot. Elements should include
+\code{PRE}, \code{POST}, \code{IN-RANGE}, and \code{TREND}, which respectively give the colors for
+the portion of the plot before \code{start_year}, after \code{stop_year}, between
+\code{start_year} and \code{stop_year}, and the trend line.}
+
+\item{pre_color}{Override default color for the portion of the chart before
+\code{start_year}.}
+
+\item{post_color}{Override default color for the portion of the chart after
+\code{stop_year}.}
+
+\item{in_range_color}{Override default color for the portion of the chart
+between \code{start_year} and \code{stop_year}.}
+
+\item{trend_color}{Override default color for the trend line.}
 }
 \value{
 A plot object.
@@ -50,6 +71,14 @@ china <- get_kaya_data("China")
 plot_kaya(china, "F", 2001, 2011)
 uk <- get_kaya_data("United Kingdom")
 plot_kaya(uk, "e", log_scale = TRUE, trend_line = TRUE)
+plot_kaya(uk, "e", log_scale = TRUE, trend_line = TRUE,
+          start_year = 1970, stop_year = 2000,
+          colors = c(PRE="limegreen", POST="darkgreen",
+                     "IN-RANGE" = "cadetblue", TREMD="orange"))
+plot_kaya(uk, "e", log_scale = TRUE, trend_line = TRUE,
+          start_year = 1970, stop_year = 2000,
+          pre_color = "limegreen", post_color = "limegreen",
+          trend_color = "magenta")
 world <- get_kaya_data("World")
 plot_kaya(world, "g", 1982, log_scale = TRUE, trend_line = TRUE)
 }

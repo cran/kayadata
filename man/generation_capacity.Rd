@@ -9,11 +9,11 @@ generation_capacity()
 \value{
 a tibble of values for generation sources
 \describe{
-    \item{fuel}{Energy source: Coal, Nuclear, Gas, Solar Thermal, or Wind}
-    \item{description}{Text description of the power source}
-    \item{nameplate_capacity}{Maximum sustained power output, in megawatts}
-    \item{capacity_factor}{Capacity factor: the fraction of the nameplate
-        capacity that the plant can provide, averaged over a typical year}
+\item{fuel}{Energy source: Coal, Nuclear, Gas, Solar Thermal, or Wind}
+\item{description}{Text description of the power source}
+\item{nameplate_capacity}{Maximum sustained power output, in megawatts}
+\item{capacity_factor}{Capacity factor: the fraction of the nameplate
+capacity that the plant can provide, averaged over a typical year}
 }
 }
 \description{

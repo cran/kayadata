@@ -9,13 +9,13 @@ lookup_region_code(region_code, data = kayadata::kaya_data, quiet = FALSE)
 \arguments{
 \item{region_code}{The three-letter country or region code}
 
-\item{data}{Data frame in which to look up `region_code`}
+\item{data}{Data frame in which to look up \code{region_code}}
 
 \item{quiet}{Suppress warnings if there is no such country or region.}
 }
 \value{
 The corresponding country or region name, or NULL if there is no
-        such country or region
+such country or region
 }
 \description{
 Look up country or region name from code

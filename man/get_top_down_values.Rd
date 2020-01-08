@@ -2,7 +2,8 @@
 % Please edit documentation in R/kaya.R
 \name{get_top_down_values}
 \alias{get_top_down_values}
-\title{Get top-down projections of Kaya variables for a country or region}
+\title{Get top-down projections of Kaya variables for one or more countries or
+regions}
 \usage{
 get_top_down_values(region_name, quiet = FALSE, region_code = NULL)
 }
@@ -13,30 +14,31 @@ get_top_down_values(region_name, quiet = FALSE, region_code = NULL)
 region.}
 
 \item{region_code}{Optional three-letter country or region code to look up
-instead of the `region_name`}
+instead of the \code{region_name}}
 }
 \value{
-a tibble of values for P, G, E, F, g, e, f, and ef for the country
-or region:
+a tibble of values for \emph{P}, \emph{G}, \emph{E}, \emph{F}, \emph{g}, \emph{e}, \emph{f}, and \emph{ef}
+for each country or region:
 \describe{
-  \item{region}{The name of the country or region}
-  \item{P}{Population, in billions}
-  \item{G}{Gross domestic product, in trillions of constant 2010 U.S.
-           dollars.}
-  \item{E}{Total primary energy consumption, in quads}
-  \item{F}{CO2 emissions from fossil fuel consumption, in millions of metric
-           tons }
-  \item{g}{Per-capita GDP, in thousands of constant 2010 U.S. dollars per
-           person.}
-  \item{e}{Energy intensity of the economy, in quads per trillion dollars.}
-  \item{f}{Emissions intensity of the energy supply, in million metric tons
-           per quad.}
-  \item{ef}{Emissions intensity of the economy, in metric tons per
-            million dollars of GDP.}
+\item{region}{The name of the country or region}
+\item{P}{Population, in billions}
+\item{G}{Gross domestic product, in trillions of constant 2010 U.S.
+dollars.}
+\item{E}{Total primary energy consumption, in quads}
+\item{F}{CO2 emissions from fossil fuel consumption, in millions of metric
+tons }
+\item{g}{Per-capita GDP, in thousands of constant 2010 U.S. dollars per
+person.}
+\item{e}{Energy intensity of the economy, in quads per trillion dollars.}
+\item{f}{Emissions intensity of the energy supply, in million metric tons
+per quad.}
+\item{ef}{Emissions intensity of the economy, in metric tons per
+million dollars of GDP.}
 }
 }
 \description{
-Get top-down projections of Kaya variables for a country or region
+Get top-down projections of Kaya variables for one or more countries or
+regions
 }
 \examples{
 get_top_down_values("New Zealand")

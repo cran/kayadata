@@ -2,29 +2,29 @@
 % Please edit documentation in R/kaya.R
 \name{get_top_down_trends}
 \alias{get_top_down_trends}
-\title{Get top-down trends for Kaya variables for a country or region, using
-projections from U.S. Energy Information Administration's International
-Energy Outlook report.}
+\title{Get top-down trends for Kaya variables for one or more countries or
+regions, using projections from U.S. Energy Information Administration's
+International Energy Outlook report.}
 \usage{
 get_top_down_trends(region_name, quiet = FALSE, region_code = NULL)
 }
 \arguments{
-\item{region_name}{The name of a country or region to look up}
+\item{region_name}{The name of one or more countries or regions to look up}
 
-\item{quiet}{Suppress warnings if there is no data for that country or
-region.}
+\item{quiet}{Suppress warnings if there is no data for the specified
+countries or regions.}
 
-\item{region_code}{Optional three-letter country or region code to look up
-instead of the `region_name`}
+\item{region_code}{Optional three-letter country or region codes to look up
+instead of the \code{region_name}}
 }
 \value{
-a tibble of trends for P, G, E, F, g, e, f, and ef for the country,
-or region in percent per year.
+a tibble of trends for \emph{P}, \emph{G}, \emph{E}, \emph{F}, \emph{g}, \emph{e}, \emph{f}, and \emph{ef}
+for each country or region in percent per year.
 }
 \description{
-Get top-down trends for Kaya variables for a country or region, using
-projections from U.S. Energy Information Administration's International
-Energy Outlook report.
+Get top-down trends for Kaya variables for one or more countries or
+regions, using projections from U.S. Energy Information Administration's
+International Energy Outlook report.
 }
 \examples{
 get_top_down_trends("Spain")

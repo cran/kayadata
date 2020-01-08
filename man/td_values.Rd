@@ -6,20 +6,20 @@
 \title{Top-down projections of future Kaya variables for many countries and regions}
 \format{A tibble containing 648 rows and 12 variables
 \describe{
-  \item{region}{Country or region name}
-  \item{region_code}{Three-letter country or region code}
-  \item{geography}{Geographic category: "nation", "region", or "world"}
-  \item{year}{The year}
-  \item{P}{Population, in billions}
-  \item{G}{Gross domestic product, in trillions of constant 2010 U.S. dollars}
-  \item{E}{Total primary energy consumption, in quads}
-  \item{F}{Total CO2 emissions, in millions of metric tons}
-  \item{g}{Per-capita GDP, in thousands of constant 2010 U.S. dollars per person.}
-  \item{e}{Energy intensity of the economy, in quads per trillion dollars.}
-  \item{f}{Emissions intensity of the energy supply, in million metric tons
-           per quad.}
-  \item{ef}{Emissions intensity of the economy, in metric tons per
-            million dollars of GDP.}
+\item{region}{Country or region name}
+\item{region_code}{Three-letter country or region code}
+\item{geography}{Geographic category: "nation", "region", or "world"}
+\item{year}{The year}
+\item{P}{Population, in billions}
+\item{G}{Gross domestic product, in trillions of constant 2010 U.S. dollars}
+\item{E}{Total primary energy consumption, in quads}
+\item{F}{Total CO2 emissions, in millions of metric tons}
+\item{g}{Per-capita GDP, in thousands of constant 2010 U.S. dollars per person.}
+\item{e}{Energy intensity of the economy, in quads per trillion dollars.}
+\item{f}{Emissions intensity of the energy supply, in million metric tons
+per quad.}
+\item{ef}{Emissions intensity of the economy, in metric tons per
+million dollars of GDP.}
 }}
 \source{
 \url{https://www.eia.gov/outlooks/archive/ieo17/}
