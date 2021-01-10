@@ -9,7 +9,8 @@ generation_capacity()
 \value{
 a tibble of values for generation sources
 \describe{
-\item{fuel}{Energy source: Coal, Nuclear, Gas, Solar Thermal, or Wind}
+\item{fuel}{Energy source: Coal, Nuclear, Gas, Solar Thermal,
+Solar Photovoltaic, Onshore Wind, or Offshore Wind}
 \item{description}{Text description of the power source}
 \item{nameplate_capacity}{Maximum sustained power output, in megawatts}
 \item{capacity_factor}{Capacity factor: the fraction of the nameplate
@@ -30,7 +31,8 @@ gc
 }
 \references{
 Environmental Protection Agency (2018) "Electric Power Monthly,"
-(October 2018) \url{https://www.eia.gov/electricity/monthly/current_month/epm.pdf},
+(October, 2018)
+\url{https://www.eia.gov/electricity/monthly/archive/october2018.pdf},
 \href{https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_07_a}{Table 6.7.A}.
 
 Pielke, Jr., Roger A., \emph{The Climate Fix} (Basic Books, 2010).

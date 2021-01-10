@@ -24,7 +24,7 @@
 #'
 #' Raupach, Michael R., _et al._, "Global and regional drivers of accelerating
 #' CO2 emissions," PNAS **104**, 10288--10293 (2007)
-#' [doi: `10.1073/pnas.0700609104`](https://doi.org/10.1073/pnas.0700609104).
+#' \doi{10.1073/pnas.0700609104}.
 #'
 #' @description
 #'
@@ -43,8 +43,8 @@
 #' Raupach _et al_, 2007)
 #'
 #'
-#' The data in this packages covers 1960-2018 for population and GDP, and
-#' 1965-2018 for energy and fossil-fuel CO2 emissions.
+#' The data in this packages covers 1960-2019 for population and GDP, and
+#' 1965-2019 for energy and fossil-fuel CO2 emissions.
 #'
 #' The package uses data on population and GDP from the World Bank,
 #' using market exchange rates (MER) for GDP because those data go back to
@@ -76,5 +76,22 @@
 #' @importFrom stats approx
 #' @importFrom tidyr gather spread
 #' @importFrom stringr str_to_upper str_c str_trim
+#'
+NULL
+
+#' Aggregate regional data
+#'
+#' Problems with aggregate regional data
+#'
+#' The World Bank is missing GDP data for a number of nations, such as Syria
+#' and Taiwan.  Because of this and the incommensurability between the regions
+#' used for aggregate statistics in the World Bank data and the BP data,
+#' aggregate regional data (e.g., for the Middle East and Africa) should be
+#' treated with caution.
+#
+#' This problem does not hold for individual nations, where missing data
+#' appears as `NA` values.
+#'
+#' @name regions
 #'
 NULL

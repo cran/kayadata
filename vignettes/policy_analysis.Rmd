@@ -2,7 +2,7 @@
 title: "Example: Analysis of Emissions-Reduction Policy"
 author: "Jonathan Gilligan"
 date: "2019-07-31"
-bibliography: "policy_analysis.bib"
+bibliography: "policy_analysis.json"
 csl: "american-political-science-association.csl"
 vignette: >
   %\VignetteEncoding{UTF-8}

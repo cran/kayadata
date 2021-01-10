@@ -47,3 +47,6 @@ or regions for a given year
 project_top_down("China", 2037)
 project_top_down(region_code = "VNM", year = 2043)
 }
+\seealso{
+regions
+}

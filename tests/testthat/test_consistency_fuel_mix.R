@@ -20,11 +20,13 @@ test_that("Fuel mix adds up", {
       if (nrow(kd) > 0) {
         expect_equal(fm$quads, kd$E, tolerance = 1E-2,
                      label = "Sum of primary energy sources",
-                     expected.label = "Total primary energy consumption")
+                     expected.label = "Total primary energy consumption",
+                     info = stringr::str_c("Region: ", r))
       }
       expect_equal(fm$frac, 1, tolerance = 1E-2,
                    label = "Sum of percentages",
-                   expected.label = "100")
+                   expected.label = "100",
+                   info = stringr::str_c("Region: ", r))
     }
   }
 })

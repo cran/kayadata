@@ -1,3 +1,30 @@
+# kayadata 0.5.0
+
+This release updates to use the 2020 release of BP Energy Statistics. This
+release has data through 2019.
+
+* The World Bank is missing GDP data for a number of nations, such as Syria and 
+  Taiwan. Because of this and the  incommensurability of the regions used for 
+  aggregate statistics in the World Bank data and the BP data, regional data 
+  should be treated with caution. 
+
+  This problem does not hold for individual nations, where missing data appears as
+  NA values.
+* Fix a bug where `testthat` tests would throw errors on systems where the 
+  suggested `vdiffr` package cannot be installed.
+  The package now passes `R CMD check` with the environment variable
+  `_R_CHECK_DEPENDS_ONLY_` set to `TRUE`.
+  
+
+# kayadata 0.4.4
+
+This release is a minor bug fix. 
+
+* Previously there hadn't been an emissions 
+  factor for hydroelectricity if renewables were not collapsed in the fuel mix.
+  Now there's a factor for hydro if `emissions_factors()` is called with 
+  `collapse_renewables = FALSE`.
+
 # kayadata 0.4.3 
 
 This release is mostly a bug fix for changes in the way that the latest releases

@@ -1,0 +1,122 @@
+[
+  {
+    "URL": "https://www4.unfccc.int/sites/submissions/INDC/Published%20Documents/United%20States%20of%20America/1/U.S.%20Cover%20Note%20INDC%20and%20Accompanying%20Information.pdf",
+    "author": [
+      {
+        "literal": "United States of America"
+      }
+    ],
+    "id": "us:indc.cover.note:2015",
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "note": "Available at <https://www4.unfccc.int/sites/submissions/INDC/Published%20Documents/United%20States%20of%20America/1/U.S.%20Cover%20Note%20INDC%20and%20Accompanying%20Information.pdf>",
+    "title": "U.S. cover note, INDC, and accompanying information",
+    "type": "report"
+  },
+  {
+    "DOI": "10.1088/1748-9326/4/4/044001",
+    "author": [
+      {
+        "comma-suffix": false,
+        "family": "Pielke",
+        "given": "Roger A.",
+        "suffix": "Jr."
+      }
+    ],
+    "container-title": "Environmental Research Letters",
+    "id": "pielke:japan.decarbonization:2009",
+    "issue": "4",
+    "issued": {
+      "date-parts": [
+        [
+          2009
+        ]
+      ]
+    },
+    "page": "044001",
+    "title": "Mamizu climate policy: An evaluation of Japanese carbon emissions reduction targets",
+    "title-short": "Mamizu climate policy",
+    "type": "article-journal",
+    "volume": "4"
+  },
+  {
+    "DOI": "10.1088/1748-9326/4/2/024010",
+    "author": [
+      {
+        "comma-suffix": false,
+        "family": "Pielke",
+        "given": "Roger A.",
+        "suffix": "Jr."
+      }
+    ],
+    "container-title": "Environmental Research Letters",
+    "id": "pielke:uk.decarbonization:2009",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2009
+        ]
+      ]
+    },
+    "page": "024010",
+    "title": "The British Climate Change Act: A critical evaluation and proposed alternative approach",
+    "title-short": "The British Climate Change Act",
+    "type": "article-journal",
+    "volume": "4"
+  },
+  {
+    "DOI": "10.1016/j.envsci.2010.10.008",
+    "author": [
+      {
+        "comma-suffix": false,
+        "family": "Pielke",
+        "given": "Roger A.",
+        "suffix": "Jr."
+      }
+    ],
+    "container-title": "Environmental Science & Policy",
+    "id": "pielke:australia.decarbonization:2011",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          2011
+        ]
+      ]
+    },
+    "page": "20-27",
+    "publisher": "IOP Publishing",
+    "title": "An evaluation of the targets and timetables of proposed australian emissions reduction policies",
+    "type": "article-journal",
+    "volume": "14"
+  },
+  {
+    "ISBN": "978-0-465-02052-2",
+    "author": [
+      {
+        "comma-suffix": false,
+        "family": "Pielke",
+        "given": "Roger A.",
+        "suffix": "Jr."
+      }
+    ],
+    "id": "pielke:tcf:2010",
+    "issued": {
+      "date-parts": [
+        [
+          2010
+        ]
+      ]
+    },
+    "publisher": "Basic Books",
+    "title": "The climate fix: What scientists and politicians won’t tell you about global warming",
+    "title-short": "The climate fix",
+    "type": "book"
+  }
+]

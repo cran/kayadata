@@ -4,7 +4,8 @@
 \name{td_values}
 \alias{td_values}
 \title{Top-down projections of future Kaya variables for many countries and regions}
-\format{A tibble containing 648 rows and 12 variables
+\format{
+A tibble containing 640 rows and 12 variables
 \describe{
 \item{region}{Country or region name}
 \item{region_code}{Three-letter country or region code}
@@ -20,7 +21,8 @@
 per quad.}
 \item{ef}{Emissions intensity of the economy, in metric tons per
 million dollars of GDP.}
-}}
+}
+}
 \source{
 \url{https://www.eia.gov/outlooks/archive/ieo17/}
 }
@@ -30,5 +32,8 @@ td_values
 \description{
 A dataset containing top-down projections of P, G, and E, from the
 EIA's International Energy Outlook 2017.
+}
+\seealso{
+regions
 }
 \keyword{datasets}

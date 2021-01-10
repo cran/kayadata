@@ -2,6 +2,10 @@
 #' @keywords internal
 mtoe <- 1 / 25.2 # quads
 
+#' Conversion factor: quads per EJ
+#' @keywords internal
+EJ <- 0.947817120 # quads
+
 globalVariables(c("fuel_mix", "kaya_data", "region", "region_code",
                   "geography", "year", "P", "G", "E", "F", "g", "e", "f", "ef",
                   "td_values", "td_trends"))
@@ -14,6 +18,7 @@ globalVariables(c("fuel_mix", "kaya_data", "region", "region_code",
 #'
 #' @return The corresponding country or region name, or NULL if there is no
 #'         such country or region
+#' @seealso regions
 #' @keywords internal
 #' @importFrom magrittr %>% %$%
 lookup_region_code <- function(region_code, data = kayadata::kaya_data,
@@ -34,6 +39,7 @@ lookup_region_code <- function(region_code, data = kayadata::kaya_data,
 #' Get a list of countries in the Kaya data
 #'
 #' @return a vector of country and region names
+#' @seealso regions
 #' @export
 kaya_region_list <- function() {
   levels(kayadata::kaya_data$region) %>%
@@ -87,6 +93,8 @@ kaya_region_list <- function() {
 #'
 #'          Note that emissions (_F_, _f_, and _ef_) are reported as millions
 #'          of metric tons of carbon dioxide, not carbon.
+#'
+#' @seealso regions
 #'
 #' @examples
 #' get_kaya_data("Brazil")
@@ -145,6 +153,8 @@ get_kaya_data <- function(region_name, gdp = c("MER", "PPP"), quiet = FALSE,
 #'     fuel}
 #' }
 #'
+#' @seealso regions
+#'
 #' @examples
 #' get_fuel_mix("United States")
 #' get_fuel_mix("World", collapse_renewables = FALSE)
@@ -171,8 +181,8 @@ get_fuel_mix <- function(region_name, collapse_renewables = TRUE,
       mutate(fuel = forcats::fct_recode(fuel, Renewables = "Hydro") %>%
                forcats::lvls_expand(levs)) %>%
       group_by(region, year, fuel) %>%
-      summarize_at(vars(quads, frac), list(~sum(., na.rm = T))) %>%
-      ungroup()
+      summarize_at(vars(quads, frac), list(~sum(., na.rm = T)),
+                   .groups = "drop")
   }
   if (nrow(data) == 0 && ! quiet) {
     warning("There is no data for country or region ",
@@ -195,6 +205,9 @@ get_fuel_mix <- function(region_name, collapse_renewables = TRUE,
 #'
 #' @return a tibble of trends for _P_, _G_, _E_, _F_, _g_, _e_, _f_, and _ef_
 #'   for each country or region in percent per year.
+#'
+#' @seealso regions
+#'
 #' @examples
 #' get_top_down_trends("Spain")
 #' get_top_down_trends(region_code = "RUS")
@@ -248,6 +261,8 @@ get_top_down_trends <- function(region_name, quiet = FALSE,
 #'   \item{ef}{Emissions intensity of the economy, in metric tons per
 #'             million dollars of GDP.}
 #' }
+#'
+#' @seealso regions
 #'
 #' @examples
 #' get_top_down_values("New Zealand")
@@ -307,6 +322,9 @@ get_top_down_values <- function(region_name, quiet = FALSE,
 #'   \item{ef}{Emissions intensity of the economy, in metric tons per
 #'             million dollars of GDP.}
 #' }
+#'
+#' @seealso regions
+#'
 #' @examples
 #' project_top_down("China", 2037)
 #' project_top_down(region_code = "VNM", year = 2043)
@@ -333,8 +351,8 @@ project_top_down <- function(region_name, year, quiet = FALSE,
     dplyr::select(-region_code, -geography) %>%
     dplyr::group_by(region) %>%
     dplyr::summarize_at(vars(-year),
-                        list(~approx(x = year, y = ., xout = ytmp)$y)) %>%
-    dplyr::ungroup() %>%
+                        list(~approx(x = year, y = ., xout = ytmp)$y),
+                        .groups = "drop") %>%
     dplyr::mutate(year = (!!year)) %>%
     dplyr::select(region, year, P, G, g, E, F, e, f, ef)
   if (nrow(data) == 0 && is.null(region_code)) {
@@ -351,19 +369,27 @@ project_top_down <- function(region_name, year, quiet = FALSE,
 
 #' Get emission factors for different energy sources
 #'
+#' @param collapse_renewables Combine hydroelectricity and other renewables
+#'   into a single category.
 #' @return a tibble of values for emissions factors, in million metric
 #'         tons of carbon dioxide per quad of energy.
+#'
+#' @seealso regions
+#'
 #' @examples
 #' e_fac <- emissions_factors()
 #' e_fac
 #' @export
-emissions_factors <- function() {
-  tibble(
-    fuel = c("Coal", "Oil", "Natural Gas", "Nuclear", "Renewables"),
-    emission_factor = c(94.4, 70.0, 53.1, 0.0, 0.0)
+emissions_factors <- function(collapse_renewables = TRUE) {
+  ef <- tibble(
+    fuel = c("Coal", "Oil", "Natural Gas", "Nuclear", "Hydro", "Renewables"),
+    emission_factor = c(94.4, 70.0, 53.1, 0.0, 0.0, 0.0)
   ) %>%
-    mutate(fuel = ordered(fuel, levels = c("Coal", "Natural Gas", "Oil",
-                                           "Nuclear", "Renewables")))
+    mutate(fuel = ordered(fuel, levels = levels(fuel_mix$fuel)))
+  if (collapse_renewables) {
+    ef <- ef %>% filter(fuel != "Hydro") %>%
+      mutate(fuel = forcats::fct_recode(fuel, Renewables = "Hydro"))
+  }
 }
 
 #' Get power output from generation sources
@@ -376,7 +402,8 @@ emissions_factors <- function() {
 #'
 #' @return a tibble of values for generation sources
 #' \describe{
-#'     \item{fuel}{Energy source: Coal, Nuclear, Gas, Solar Thermal, or Wind}
+#'     \item{fuel}{Energy source: Coal, Nuclear, Gas, Solar Thermal,
+#'     Solar Photovoltaic, Onshore Wind, or Offshore Wind}
 #'     \item{description}{Text description of the power source}
 #'     \item{nameplate_capacity}{Maximum sustained power output, in megawatts}
 #'     \item{capacity_factor}{Capacity factor: the fraction of the nameplate
@@ -387,21 +414,28 @@ emissions_factors <- function() {
 #' gc
 #' @references
 #' Environmental Protection Agency (2018) "Electric Power Monthly,"
-#' (October 2018) <https://www.eia.gov/electricity/monthly/current_month/epm.pdf>,
+#' (October, 2018)
+#' <https://www.eia.gov/electricity/monthly/archive/october2018.pdf>,
 #' [Table 6.7.A](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_07_a).
 #'
 #' Pielke, Jr., Roger A., _The Climate Fix_ (Basic Books, 2010).
 #' @export
 generation_capacity <- function() {
   tibble(
-    fuel = c("Coal", "Nuclear", "Natural Gas", "Solar Thermal", "Wind"),
+    fuel = c("Coal", "Nuclear", "Natural Gas", "Photovoltaic Solar",
+             "Solar Thermal", "Onshore Wind", "Offshore Wind"),
     description = c("Large coal-fired power plant",
                     "Large nuclear power plant",
                     "Gas-fired power plant",
                     "Concentrated solar-thermal power plant",
-                    "Wind turbine"),
-    nameplate_capacity = c(1000, 1000, 500,  200,  2.5),
-    capacity_factor    = c(0.53, 0.75, 0.56, 0.30, 0.30)
+                    "Photovoltaic solar farm",
+                    "Onshore Wind turbine",
+                    "Offshore Wind turbine"),
+    nameplate_capacity = c(1000, 1000, 500,  100, 100,  6, 13),
+    # For wind turbine capacity factors, see
+    # * US DOE EERE (2019) 2018 Wind Technologies Market Report
+    # * IEA Offshore Wind Outlook 2019
+    capacity_factor    = c(0.53, 0.75, 0.56, 0.25, 0.25, 0.42, 0.50)
   )
 }
 

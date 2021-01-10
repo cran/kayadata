@@ -4,7 +4,11 @@
 \alias{emissions_factors}
 \title{Get emission factors for different energy sources}
 \usage{
-emissions_factors()
+emissions_factors(collapse_renewables = TRUE)
+}
+\arguments{
+\item{collapse_renewables}{Combine hydroelectricity and other renewables
+into a single category.}
 }
 \value{
 a tibble of values for emissions factors, in million metric
@@ -16,4 +20,7 @@ Get emission factors for different energy sources
 \examples{
 e_fac <- emissions_factors()
 e_fac
+}
+\seealso{
+regions
 }

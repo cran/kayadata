@@ -4,7 +4,8 @@
 \name{td_trends}
 \alias{td_trends}
 \title{Top-down projections of trends in Kaya variables for many countries and regions}
-\format{A tibble containing 226 rows and 11 variables
+\format{
+A tibble containing 226 rows and 11 variables
 \describe{
 \item{region}{Country or region name}
 \item{region_code}{Three-letter country or region code}
@@ -17,7 +18,8 @@
 \item{e}{Trend in energy intensity of the economy, in fraction per year}
 \item{f}{Trend in emissions intensity of the energy supply, in fraction per year}
 \item{ef}{Trend in emissions intensity of the economy, in fraction per year}
-}}
+}
+}
 \source{
 \url{https://www.eia.gov/outlooks/archive/ieo17/}
 }
@@ -27,5 +29,8 @@ td_trends
 \description{
 A dataset containing top-down projections of trends in P, G, and E,
 from the EIA's International Energy Outlook 2017.
+}
+\seealso{
+regions
 }
 \keyword{datasets}

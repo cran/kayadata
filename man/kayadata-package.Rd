@@ -19,8 +19,8 @@ per-capita GDP, \emph{e} is the energy intensity of the economy, and
 \href{https://www.ipcc.ch/report/emissions-scenarios/}{Ch. 3, p. 105};
 Raupach \emph{et al}, 2007)
 
-The data in this packages covers 1960-2018 for population and GDP, and
-1965-2018 for energy and fossil-fuel CO2 emissions.
+The data in this packages covers 1960-2019 for population and GDP, and
+1965-2019 for energy and fossil-fuel CO2 emissions.
 
 The package uses data on population and GDP from the World Bank,
 using market exchange rates (MER) for GDP because those data go back to
@@ -58,5 +58,5 @@ Nakicenovic, Nebojsa, and Rob Swart (Eds.),
 
 Raupach, Michael R., \emph{et al.}, "Global and regional drivers of accelerating
 CO2 emissions," PNAS \strong{104}, 10288--10293 (2007)
-\href{https://doi.org/10.1073/pnas.0700609104}{doi: \code{10.1073/pnas.0700609104}}.
+\doi{10.1073/pnas.0700609104}.
 }

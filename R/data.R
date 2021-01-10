@@ -3,7 +3,7 @@
 #' A dataset containing Kaya identity parameters
 #' P, G, E, F, g, e, f, and ef for many countries
 #'
-#' @format A tibble containing 5133 rows and 14 variables:
+#' @format A tibble containing 5160 rows and 14 variables:
 #' \describe{
 #'   \item{region}{Country or region name}
 #'   \item{region_code}{Three-letter country or region code}
@@ -24,6 +24,7 @@
 #'   \item{G_mer}{Gross domestic product at market-exchange-rate,
 #'                in trillions of constant 2010 U.S. dollars}
 #' }
+#' @seealso regions
 #' @source <https://data.worldbank.org/indicator/SP.POP.TOTL>,
 #' <https://data.worldbank.org/indicator/NY.GDP.MKTP.KD>, and
 #' <https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy/downloads.html>
@@ -37,7 +38,7 @@
 #' total primary energy supply comes from coal, gas, oil, nuclear, and
 #' renewable sources.
 #'
-#' @format A tibble containing 936 rows and 7 variables
+#' @format A tibble containing 948 rows and 7 variables
 #' \describe{
 #'   \item{region}{Country or region name}
 #'   \item{region_code}{Three-letter country or region code}
@@ -51,6 +52,7 @@
 #'              energy consumption from the fuel}
 #' }
 #' @source <https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy/downloads.html>
+#' @seealso regions
 "fuel_mix"
 
 #' Top-down projections of future Kaya variables for many countries and regions
@@ -58,7 +60,7 @@
 #' A dataset containing top-down projections of P, G, and E, from the
 #' EIA's International Energy Outlook 2017.
 #'
-#' @format A tibble containing 648 rows and 12 variables
+#' @format A tibble containing 640 rows and 12 variables
 #' \describe{
 #'   \item{region}{Country or region name}
 #'   \item{region_code}{Three-letter country or region code}
@@ -76,6 +78,7 @@
 #'             million dollars of GDP.}
 #' }
 #' @source <https://www.eia.gov/outlooks/archive/ieo17/>
+#' @seealso regions
 "td_values"
 
 #' Top-down projections of trends in Kaya variables for many countries and regions
@@ -98,4 +101,5 @@
 #'   \item{ef}{Trend in emissions intensity of the economy, in fraction per year}
 #' }
 #' @source <https://www.eia.gov/outlooks/archive/ieo17/>
+#' @seealso regions
 "td_trends"

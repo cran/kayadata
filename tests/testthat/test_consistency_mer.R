@@ -13,7 +13,8 @@ test_that("F = product P * g * e * f", {
       dplyr::filter(none.na(F, P, g, e, f))
     if (nrow(kd) > 0) {
       expect_equal(kd$F, kd$P * kd$g * kd$e * kd$f, tolerance = 1E-6,
-                   label = "F", expected.label = "Pgef")
+                   label = "F", expected.label = "Pgef",
+                   info = stringr::str_c("Region: ", r))
     }
   }
 })
@@ -25,7 +26,8 @@ test_that("G = product P * g", {
       dplyr::filter(none.na(G, P, g))
     if (nrow(kd) > 0) {
       expect_equal(kd$G, kd$P * kd$g, tolerance = 1E-6,
-                   label = "G", expected.label = "Pg")
+                   label = "G", expected.label = "Pg",
+                   info = stringr::str_c("Region: ", r))
     }
   }
 })
@@ -38,7 +40,8 @@ test_that("E = product G * e", {
       dplyr::filter(none.na(E, G, e))
     if (nrow(kd) > 0) {
       expect_equal(kd$E, kd$G * kd$e, tolerance = 1E-6,
-                   label = "E", expected.label = "Ge")
+                   label = "E", expected.label = "Ge",
+                   info = stringr::str_c("Region: ", r))
     }
   }
 })
@@ -50,7 +53,8 @@ test_that("ef = product e * f", {
       dplyr::filter(none.na(ef, e, f))
     if (nrow(kd) > 0) {
       expect_equal(kd$ef, kd$e * kd$f, tolerance = 1E-6,
-                   label = "ef", expected.label = "e * f")
+                   label = "ef", expected.label = "e * f",
+                   info = stringr::str_c("Region: ", r))
     }
   }
 })

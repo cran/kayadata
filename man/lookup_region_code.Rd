@@ -20,4 +20,7 @@ such country or region
 \description{
 Look up country or region name from code
 }
+\seealso{
+regions
+}
 \keyword{internal}

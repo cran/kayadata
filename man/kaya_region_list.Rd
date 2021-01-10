@@ -12,3 +12,6 @@ a vector of country and region names
 \description{
 Get a list of countries in the Kaya data
 }
+\seealso{
+regions
+}

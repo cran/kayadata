@@ -5,7 +5,8 @@
 \alias{fuel_mix}
 \title{Mix of fuels contributing to primary energy supply for many countries and
 regions}
-\format{A tibble containing 936 rows and 7 variables
+\format{
+A tibble containing 948 rows and 7 variables
 \describe{
 \item{region}{Country or region name}
 \item{region_code}{Three-letter country or region code}
@@ -17,7 +18,8 @@ and "Renewables"}
 or region and year}
 \item{frac}{The fraction of that country or region's total primary
 energy consumption from the fuel}
-}}
+}
+}
 \source{
 \url{https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy/downloads.html}
 }
@@ -28,5 +30,8 @@ fuel_mix
 A dataset containing the fuel mix of how many quads and what fraction of
 total primary energy supply comes from coal, gas, oil, nuclear, and
 renewable sources.
+}
+\seealso{
+regions
 }
 \keyword{datasets}
