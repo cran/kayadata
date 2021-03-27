@@ -385,11 +385,12 @@ emissions_factors <- function(collapse_renewables = TRUE) {
     fuel = c("Coal", "Oil", "Natural Gas", "Nuclear", "Hydro", "Renewables"),
     emission_factor = c(94.4, 70.0, 53.1, 0.0, 0.0, 0.0)
   ) %>%
-    mutate(fuel = ordered(fuel, levels = levels(fuel_mix$fuel)))
+    mutate(fuel = ordered(fuel, levels = levels(kayadata::fuel_mix$fuel)))
   if (collapse_renewables) {
     ef <- ef %>% filter(fuel != "Hydro") %>%
       mutate(fuel = forcats::fct_recode(fuel, Renewables = "Hydro"))
   }
+  ef
 }
 
 #' Get power output from generation sources

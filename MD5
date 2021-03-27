@@ -1,12 +1,12 @@
-a10b336952495194dd6c98dd70cb2677 *DESCRIPTION
+e8e098166a33a885e9411768d6ba721b *DESCRIPTION
 09703921597ac71f161ec34ca0b58275 *LICENSE
 5fddbda4a63f893614160999c17bea0a *NAMESPACE
-de3ebede4b3093edded45697a6fa54c8 *NEWS.md
+928c9c84f2826c49641cdb80e5f13f40 *NEWS.md
 d0cf3a39d7712563be638f234b90518c *R/data.R
-42c6b368fb40f2c76e3c7e75cbebd4f9 *R/kaya.R
+ced4c1a535bfc5c0c3bfb3cdf351df3e *R/kaya.R
 33eef6547df5a218e9168135cd01e966 *R/kayadata.R
 54a4a78b0f920cb07efd3c9060082f5d *R/plot_kaya.R
-2089d7147bb5571dfb697929fb9f3bd9 *build/partial.rdb
+ab0b5b8b9f77f1278356c41effb7c7af *build/partial.rdb
 562540b7bc27a1574d4b93ced4674979 *build/vignette.rds
 a89c09663928e96d1835637a3fa3bd79 *data/fuel_mix.rda
 c19e0aaa1b59cf5bf1dfe2e76215e366 *data/kaya_data.rda
@@ -15,10 +15,10 @@ ee3177e6b6b3ad3be6fdf23fa5b13d8b *data/td_trends.rda
 a20dea6a5d33c2cda63fa987667c6e09 *inst/WORDLIST
 05b0466854ccaded53f0693918876717 *inst/doc/kayadata.R
 e8949916b261d8a1d3d4a0dbed2b1e5d *inst/doc/kayadata.Rmd
-12a3a7d6478fc8576da9b974453c36db *inst/doc/kayadata.html
+ee104404ac1f5905ddbce80374870fec *inst/doc/kayadata.html
 8b5da6db8f3168ae9f5acf732cee23cf *inst/doc/policy_analysis.R
 fddd1593a6469be56e1d7d8b65b2eb02 *inst/doc/policy_analysis.Rmd
-d5ebd3f4211844c559ec9278e0d3b8fe *inst/doc/policy_analysis.html
+da96df7f438d45e2613b10de9a8f9941 *inst/doc/policy_analysis.html
 ece0b655b6498f3463e77f0c8bd4f8dd *man/EJ.Rd
 ce0b9b8df3b77b2c4d62a648d6eb3394 *man/emissions_factors.Rd
 a18a97237166dbd1dae80bf21c88cf84 *man/figures/README-plot-fuel-mix-1.png
@@ -52,6 +52,7 @@ e0dd99d964402b8f9b74accd16044f95 *tests/testthat.R
 1b61d9fc1b75e825d9a8d8371ce7f836 *tests/testthat/test_consistency_fuel_mix.R
 7c950683b7aed2e9c6fb18be2b7f7d3b *tests/testthat/test_consistency_mer.R
 be9c2d8de973fce37222d5a85d5ed497 *tests/testthat/test_consistency_ppp.R
+b715ef1548d032de72148a933311f1b4 *tests/testthat/test_emissions_factors.R
 6901eee576988f7774311b47914e164f *tests/testthat/test_plot_kaya.R
 7eeecbff306a2214d457e9eab9d9d1b6 *vignettes/american-political-science-association.csl
 4a6255ba16bbf263eb18e573c4509d82 *vignettes/journal_abb.txt

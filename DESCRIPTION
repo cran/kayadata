@@ -1,8 +1,8 @@
 Package: kayadata
 Type: Package
 Title: Kaya Identity Data for Nations and Regions
-Version: 0.5.0
-Date: 2021-01-03
+Version: 0.5.1
+Date: 2021-03-24
 Authors@R: 
     person(given = "Jonathan",
            family = "Gilligan",
@@ -36,8 +36,8 @@ Suggests: broom (>= 0.5), knitr (>= 1.22), purrr (>= 0.3), rmarkdown
         (>= 1.12), testthat (>= 2.0), vdiffr (>= 0.3.1)
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-01-09 23:16:09 UTC; Jonathan
+Packaged: 2021-03-25 03:51:02 UTC; Jonathan
 Author: Jonathan Gilligan [cre, aut] (<https://orcid.org/0000-0003-1375-6686>)
 Maintainer: Jonathan Gilligan <jonathan.gilligan@vanderbilt.edu>
 Repository: CRAN
-Date/Publication: 2021-01-10 15:20:08 UTC
+Date/Publication: 2021-03-28 00:00:02 UTC

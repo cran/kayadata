@@ -1,3 +1,9 @@
+# kayadata 0.5.1
+
+This release is a bugfix
+
+* Provide return value from `emissions_factors()`
+
 # kayadata 0.5.0
 
 This release updates to use the 2020 release of BP Energy Statistics. This
