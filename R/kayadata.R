@@ -55,7 +55,7 @@
 #'
 #' The package uses data on energy consumption and fossil-fuel CO2 emissions
 #' from the
-#' [2019 BP Statistical Review of World Energy](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html)
+#' [2021 BP Statistical Review of World Energy](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html)
 #'
 #' @section License:
 #'
@@ -69,7 +69,8 @@
 #'
 #'
 #' @importFrom magrittr %>%
-#' @importFrom dplyr distinct filter mutate select summarize summarize_at top_n
+#' @importFrom dplyr distinct filter mutate select summarize summarize_at
+#' @importFrom dplyr slice_max
 #' @importFrom forcats fct_recode
 #' @import dplyr
 #' @import ggplot2

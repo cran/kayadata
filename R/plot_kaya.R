@@ -113,7 +113,7 @@ plot_kaya <- function(kaya_data, variable,
 
   color_scale <- ggplot2::scale_color_manual(values = colors)
 
-  legend <- ggplot2::guides(color = FALSE, shape = FALSE)
+  legend <- ggplot2::guides(color = "none", shape = "none")
 
   if (!any(is.null(start_year), is.null(stop_year))) {
     df <- dplyr::bind_rows(
@@ -144,7 +144,7 @@ plot_kaya <- function(kaya_data, variable,
   }
 
   if (trend_line) {
-    p <- p + ggplot2::geom_smooth(method = "lm",
+    p <- p + ggplot2::geom_smooth(method = "lm", formula = y ~ x,
                                   data = dplyr::filter(df, in_range == "IN-RANGE"),
                          na.rm = TRUE, se = se, mapping = aes(color = "TREND"))
   }

@@ -172,7 +172,7 @@ get_fuel_mix <- function(region_name, collapse_renewables = TRUE,
   data <- kayadata::fuel_mix %>%
     select(region, year, fuel, quads, frac) %>%
     dplyr::filter(region %in% region_name) %>%
-    group_by(region) %>% dplyr::top_n(1, year) %>% ungroup()
+    group_by(region) %>% dplyr::slice_max(year, n = 1) %>% ungroup()
 
 
   if (collapse_renewables && nrow(data) > 0) {

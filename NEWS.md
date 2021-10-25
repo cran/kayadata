@@ -1,3 +1,12 @@
+# kayadata 1.0.0
+
+The package has matured and this will be release 1.0.0.
+
+* This release updates to data through 2020:
+  * The 2021 release of BP Energy Statistics
+  * The latest population and GDP data from the World Bank.
+
+
 # kayadata 0.5.1
 
 This release is a bugfix
@@ -14,8 +23,8 @@ release has data through 2019.
   aggregate statistics in the World Bank data and the BP data, regional data 
   should be treated with caution. 
 
-  This problem does not hold for individual nations, where missing data appears as
-  NA values.
+  This problem does not hold for individual nations, where missing data appears 
+  as NA values.
 * Fix a bug where `testthat` tests would throw errors on systems where the 
   suggested `vdiffr` package cannot be installed.
   The package now passes `R CMD check` with the environment variable

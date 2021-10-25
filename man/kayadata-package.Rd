@@ -31,7 +31,7 @@ data frame.
 
 The package uses data on energy consumption and fossil-fuel CO2 emissions
 from the
-\href{https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html}{2019 BP Statistical Review of World Energy}
+\href{https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html}{2021 BP Statistical Review of World Energy}
 }
 \section{License}{
 
