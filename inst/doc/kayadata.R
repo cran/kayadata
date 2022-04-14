@@ -27,17 +27,17 @@ mexico_2050
 us_kaya = get_kaya_data("United States")
 plot_kaya(us_kaya, "ef", y_lab = "Carbon intensity of economy",
           start_year = 2000, stop_year = 2010, log_scale = TRUE,
-          trend_line = TRUE)
+          trend_line = TRUE, font_size = 10)
 
 ## ----plot-kaya-world, echo=TRUE-----------------------------------------------
 world_kaya = get_kaya_data("World")
-plot_kaya(world_kaya, "P", start_year = 2000, stop_year = 2010, log_scale = FALSE,
-          trend_line = FALSE)
+plot_kaya(world_kaya, "P", start_year = 2000, stop_year = 2010, 
+          log_scale = FALSE, trend_line = FALSE, font_size = 10)
 
 ## ----get-fuel-mix, echo=TRUE--------------------------------------------------
 mexico_mix = get_fuel_mix("Mexico")
 mexico_mix
 
 ## ----plot-fuel-mix, echo=TRUE-------------------------------------------------
-plot_fuel_mix(mexico_mix)
+plot_fuel_mix(mexico_mix, font_size = 10)
 

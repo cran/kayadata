@@ -36,7 +36,8 @@ improving energy efficiency and transitioning from fossil fuels to clean energy
 sources.
 The methods will follow Roger Pielke, Jr.'s approach for both bottom-up and
 top-down analysis
-[@pielke:tcf:2010; @pielke:uk.decarbonization:2009; @pielke:japan.decarbonization:2009; @pielke:australia.decarbonization:2011].
+[@pielke:tcf:2010; @pielke:uk.decarbonization:2009; 
+@pielke:japan.decarbonization:2009; @pielke:australia.decarbonization:2011].
 
 # Bottom-Up Analysis
 
@@ -85,33 +86,42 @@ I plot these with a log-scale on the y-axis because a constant growth rate
 produces exponential growth, so it should look linear on a semi-log plot.
 
 ```{r plot_P_1990, fig.cap = str_c("Trend in population for U.S. from 1990--", max(kaya$year, na.rm = T))}
-plot_kaya(kaya, "P", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "P", log_scale = TRUE, start_year = 1990, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 ```
 
 ```{r plot_g_1990, fig.cap = str_c("Trend in per-capita GDP for U.S. from 1990--", max(kaya$year, na.rm = T))}
-plot_kaya(kaya, "g", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "g", log_scale = TRUE, start_year = 1990, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 ```
 
 ```{r plot_e_1990, fig.cap = str_c("Trend in primary-energy intensity of the U.S. economy from 1990--", max(kaya$year, na.rm = T))}
-plot_kaya(kaya, "e", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "e", log_scale = TRUE, start_year = 1990, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 ```
 
 ```{r plot_f_1990, fig.cap = str_c("Trend in the carbon-dioxide intensity of the U.S. energy supply from 1990--", max(kaya$year, na.rm = T))}
-plot_kaya(kaya, "f", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "f", log_scale = TRUE, start_year = 1990, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 ```
 
-All of these trends look reasonable, except for _f_. Let's try _f_ again, but fitting the trend only since 2005:
+All of these trends look reasonable, except for _f_. Let's try _f_ again, but 
+fitting the trend only since 2005:
 
 ```{r plot_f_2005, fig.cap = str_c("Trend in the carbon-dioxide intensity of the U.S. energy supply from 2005--", max(kaya$year, na.rm = T))}
-plot_kaya(kaya, "f", log_scale = TRUE, start_year = 2005, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "f", log_scale = TRUE, start_year = 2005, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 ```
 
-That looks better. The abrupt changes in trend at 1990 and again at 2005 illustrate the difficulties of predicting future values by extrapolating from past trends, and indicates that the extrapolations we will use here should be taken with several grains of salt.
+That looks better. The abrupt changes in trend at 1990 and again at 2005 
+illustrate the difficulties of predicting future values by extrapolating from 
+past trends, and indicates that the extrapolations we will use here should be 
+taken with several grains of salt.
 
 ### Historical Trends
 
@@ -284,4 +294,3 @@ to
    formatC(format = "f", digits = 1)` times faster.
   
 # References
-

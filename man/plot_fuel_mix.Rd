@@ -8,7 +8,8 @@ plot_fuel_mix(
   fuel_mix,
   collapse_renewables = TRUE,
   title = NULL,
-  colors = NULL
+  colors = NULL,
+  font_size = 20
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ If \code{title} is \code{FALSE}, the plot is produced with no title.}
 
 \item{colors}{A named vector with the colors to use for
 \code{Coal}, \code{Oil}, \verb{Natural Gas}, \code{Nuclear}, \code{Hydro}, and \code{Renewables}.}
+
+\item{font_size}{The base font size.}
 }
 \value{
 A plot object.

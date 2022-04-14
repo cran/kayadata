@@ -77,6 +77,7 @@
 #' @importFrom stats approx
 #' @importFrom tidyr gather spread
 #' @importFrom stringr str_to_upper str_c str_trim
+#' @importFrom purrr set_names
 #'
 NULL
 

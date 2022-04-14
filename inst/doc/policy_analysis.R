@@ -21,23 +21,28 @@ suppressPackageStartupMessages({
 kaya <- get_kaya_data("United States")
 
 ## ----plot_P_1990, fig.cap = str_c("Trend in population for U.S. from 1990--", max(kaya$year, na.rm = T))----
-plot_kaya(kaya, "P", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "P", log_scale = TRUE, start_year = 1990, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 
 ## ----plot_g_1990, fig.cap = str_c("Trend in per-capita GDP for U.S. from 1990--", max(kaya$year, na.rm = T))----
-plot_kaya(kaya, "g", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "g", log_scale = TRUE, start_year = 1990, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 
 ## ----plot_e_1990, fig.cap = str_c("Trend in primary-energy intensity of the U.S. economy from 1990--", max(kaya$year, na.rm = T))----
-plot_kaya(kaya, "e", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "e", log_scale = TRUE, start_year = 1990, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 
 ## ----plot_f_1990, fig.cap = str_c("Trend in the carbon-dioxide intensity of the U.S. energy supply from 1990--", max(kaya$year, na.rm = T))----
-plot_kaya(kaya, "f", log_scale = TRUE, start_year = 1990, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "f", log_scale = TRUE, start_year = 1990, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 
 ## ----plot_f_2005, fig.cap = str_c("Trend in the carbon-dioxide intensity of the U.S. energy supply from 2005--", max(kaya$year, na.rm = T))----
-plot_kaya(kaya, "f", log_scale = TRUE, start_year = 2005, trend_line = TRUE, points = FALSE) +
+plot_kaya(kaya, "f", log_scale = TRUE, start_year = 2005, trend_line = TRUE, 
+          points = FALSE) +
   theme_bw()
 
 ## ----compute-bottom-up-rates--------------------------------------------------

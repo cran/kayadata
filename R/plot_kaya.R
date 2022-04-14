@@ -17,10 +17,12 @@ globalVariables(c("in_range", "fuel", "quads", "frac", "label",
 #' @param trend_line Include a trend line
 #' @param points Plot points in addition to the line.
 #' @param font_size Base size of the font for axis labels and titles.
-#' @param colors Named vector of colors to use for the plot. Elements should include
-#'   `PRE`, `POST`, `IN-RANGE`, and `TREND`, which respectively give the colors for
-#'   the portion of the plot before `start_year`, after `stop_year`, between
-#'   `start_year` and `stop_year`, and the trend line.
+#' @param colors Named vector of colors to use for the plot. Elements should
+#'   include
+#'   `PRE`, `POST`, `IN-RANGE`, and `TREND`,
+#'   which respectively give the colors for the portion of the plot before
+#'   `start_year`, after `stop_year`, between `start_year` and `stop_year`,
+#'   and the trend line.
 #' @param pre_color Override default color for the portion of the chart before
 #'   `start_year`.
 #' @param post_color Override default color for the portion of the chart after
@@ -28,6 +30,31 @@ globalVariables(c("in_range", "fuel", "quads", "frac", "label",
 #' @param in_range_color Override default color for the portion of the chart
 #'   between `start_year` and `stop_year`.
 #' @param trend_color Override default color for the trend line.
+#' @param line_sizes Named vector of sizes to use for the lines in the plot.
+#'   Elements should include
+#'   `PRE`, `POST`, `IN-RANGE`, and `TREND`,
+#'   which respectively give the sizes for lines in the portion of the plot
+#'   before `start_year`, after `stop_year`, between
+#'   `start_year` and `stop_year`, and the trend line.
+#' @param pre_line_size Override default line size for the portion of the chart
+#'   before `start_year`.
+#' @param post_line_size Override default line size for the portion of the
+#'   chart after `stop_year`.
+#' @param in_range_line_size Override default line size for the portion of the
+#'   chart between `start_year` and `stop_year`.
+#' @param trend_line_size Override default size for the trend line.
+#' @param point_sizes Named vector of sizes to use for the points in the plot.
+#'   Elements should include
+#'   `PRE`, `POST`, and `IN-RANGE`,
+#'   which respectively give the sizes for points in the portion of the plot
+#'   before `start_year`, after `stop_year`, and between
+#'   `start_year` and `stop_year`.
+#' @param pre_point_size Override default point size for the portion of the
+#'   chart before `start_year`.
+#' @param post_point_size Override default point size for the portion of the
+#'   chart after `stop_year`.
+#' @param in_range_point_size Override default point size for the portion of the
+#'   chart between `start_year` and `stop_year`.
 #'
 #' @return A plot object.
 #'
@@ -40,11 +67,16 @@ globalVariables(c("in_range", "fuel", "quads", "frac", "label",
 #' plot_kaya(uk, "e", log_scale = TRUE, trend_line = TRUE,
 #'           start_year = 1970, stop_year = 2000,
 #'           colors = c(PRE="limegreen", POST="darkgreen",
-#'                      "IN-RANGE" = "cadetblue", TREMD="orange"))
+#'                      "IN-RANGE" = "cadetblue", TREND="orange"),
+#'           line_sizes = c(PRE=0.5, POST=0.5, "IN-RANGE"=1, TREND=1.5),
+#'           point_sizes = c(PRE=2, POST=2, "IN-RANGE"=3))
 #' plot_kaya(uk, "e", log_scale = TRUE, trend_line = TRUE,
 #'           start_year = 1970, stop_year = 2000,
 #'           pre_color = "limegreen", post_color = "limegreen",
-#'           trend_color = "magenta")
+#'           trend_color = "magenta",
+#'           pre_line_size = 0.5, post_line_size = 0.5,
+#'           trend_line_size = 1.5,
+#'           pre_point_size = 2, post_point_size = 2, in_range_point_size = 3)
 #' }
 #'
 #' world <- get_kaya_data("World")
@@ -58,7 +90,12 @@ plot_kaya <- function(kaya_data, variable,
                       points = TRUE, font_size = 20,
                       colors = NULL, pre_color = NULL,
                       post_color = NULL, in_range_color = NULL,
-                      trend_color = NULL) {
+                      trend_color = NULL,
+                      line_sizes = NULL, pre_line_size = NULL,
+                      post_line_size = NULL, in_range_line_size = NULL,
+                      trend_line_size = NULL,
+                      point_sizes = NULL, pre_point_size = NULL,
+                      post_point_size = NULL, in_range_point_size = NULL) {
   labels <- c(P =  "Population (billions)",
               G =  "Gross Domestic Product ($ trillion)",
               E =  "Energy consumption (quads)",
@@ -79,6 +116,29 @@ plot_kaya <- function(kaya_data, variable,
   if (! is.null(post_color)) colors['POST'] <- post_color
   if (! is.null(in_range_color)) colors['IN-RANGE'] <- in_range_color
   if (! is.null(trend_color)) colors['TREND'] <- trend_color
+
+  if (is.null(line_sizes)) {
+    line_sizes = c("IN-RANGE" = 1,
+               "PRE" = 1,
+               "POST" = 1,
+               "TREND" = 1)
+  }
+  if (! is.null(pre_line_size)) line_sizes['PRE'] <- pre_line_size
+  if (! is.null(post_line_size)) line_sizes['POST'] <- post_line_size
+  if (! is.null(in_range_line_size)) line_sizes['IN-RANGE'] <- in_range_line_size
+  if (! is.null(trend_line_size)) line_sizes['TREND'] <- trend_line_size
+
+  if (is.null(point_sizes)) {
+    point_sizes = c("IN-RANGE" = 3,
+                   "PRE" = 3,
+                   "POST" = 3,
+                   "TREND" = 3)
+  }
+  if (! is.null(pre_point_size)) point_sizes['PRE'] <- pre_point_size
+  if (! is.null(post_point_size)) point_sizes['POST'] <- post_point_size
+  if (! is.null(in_range_point_size)) point_sizes['IN-RANGE'] <- in_range_point_size
+
+  point_sizes = set_names(point_sizes, nm = str_c(names(point_sizes), "_PT"))
 
   if (is.null(y_lab)) y_lab <- labels[variable]
   if (is.null(start_year) || is.null(stop_year)) {
@@ -118,7 +178,7 @@ plot_kaya <- function(kaya_data, variable,
   if (!any(is.null(start_year), is.null(stop_year))) {
     df <- dplyr::bind_rows(
       kaya_data %>% dplyr::filter(year <= start_year) %>%
-        dplyr::mutate(in_range = "PRE"),
+        dplyr::mutate(in_range = "PRE", pt_in_range = "PRE"),
       kaya_data %>% dplyr::filter(year >= stop_year) %>%
         dplyr::mutate(in_range = "POST"),
       kaya_data %>%
@@ -130,12 +190,14 @@ plot_kaya <- function(kaya_data, variable,
   }
 
   variable <- sym(variable)
-  p <- ggplot2::ggplot(df, aes(x = year, y = !!variable, color = in_range))
+  p <- ggplot2::ggplot(df, aes(x = year, y = !!variable, color = in_range,
+                               size = in_range))
   p <- p +
-    ggplot2::geom_line(size = 1, na.rm = TRUE)
+    ggplot2::geom_line(na.rm = TRUE)
 
   if (points) {
-    p <- p + ggplot2::geom_point(size = 3, na.rm = TRUE)
+    p <- p + ggplot2::geom_point(aes(size = str_c(in_range, "_PT")),
+                                 na.rm = TRUE)
   }
   p <- p + color_scale + legend
 
@@ -146,10 +208,13 @@ plot_kaya <- function(kaya_data, variable,
   if (trend_line) {
     p <- p + ggplot2::geom_smooth(method = "lm", formula = y ~ x,
                                   data = dplyr::filter(df, in_range == "IN-RANGE"),
-                         na.rm = TRUE, se = se, mapping = aes(color = "TREND"))
+                         na.rm = TRUE, se = se,
+                         mapping = aes(color = "TREND", size = "TREND"))
   }
 
   p <- p +
+    scale_size_manual( values = c(line_sizes, point_sizes),
+                       guide = "none") +
     ggplot2::labs(x = "Year", y = y_lab) +
     ggplot2::theme_bw(base_size = font_size) +
     ggplot2::theme(axis.title.y = ggplot2::element_text(vjust = 1.2),
@@ -182,6 +247,7 @@ plot_kaya <- function(kaya_data, variable,
 #' If `title` is `FALSE`, the plot is produced with no title.
 #' @param colors A named vector with the colors to use for
 #'   `Coal`, `Oil`, `Natural Gas`, `Nuclear`, `Hydro`, and `Renewables`.
+#' @param font_size The base font size.
 #' @return A plot object.
 #' @examples
 #' usa_fuel <- get_fuel_mix("United States", collapse_renewables = FALSE)
@@ -194,7 +260,7 @@ plot_kaya <- function(kaya_data, variable,
 #'
 #' @export
 plot_fuel_mix <- function(fuel_mix, collapse_renewables = TRUE, title = NULL,
-                          colors = NULL) {
+                          colors = NULL, font_size = 20) {
   if (is.null(title) || title == TRUE) {
     title <- fuel_mix$region %>% unique() %>% str_c(collapse = ", ")
   } else if (!is.character(title)) {
@@ -232,7 +298,7 @@ plot_fuel_mix <- function(fuel_mix, collapse_renewables = TRUE, title = NULL,
     ggplot2::xlim(c(0, 4)) +
     ggplot2::scale_fill_manual(values = colors,
                       breaks = names(labels), labels = labels, name = "Fuel") +
-    ggplot2::theme_bw(base_size = 20) +
+    ggplot2::theme_bw(base_size = font_size) +
     ggplot2::theme(panel.grid = ggplot2::element_blank(),
           axis.text = ggplot2::element_blank(),
           axis.ticks = ggplot2::element_blank())

@@ -1,3 +1,8 @@
+# kayadata 1.1.0
+
+* Add optional arguments to `plot_kaya()` to allow the user to specify the 
+  line and point sizes for the plot.
+
 # kayadata 1.0.0
 
 The package has matured and this will be release 1.0.0.
