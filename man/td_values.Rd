@@ -12,10 +12,10 @@ A tibble containing 640 rows and 12 variables
 \item{geography}{Geographic category: "nation", "region", or "world"}
 \item{year}{The year}
 \item{P}{Population, in billions}
-\item{G}{Gross domestic product, in trillions of constant 2010 U.S. dollars}
+\item{G}{Gross domestic product, in trillions of constant 2015 U.S. dollars}
 \item{E}{Total primary energy consumption, in quads}
 \item{F}{Total CO2 emissions, in millions of metric tons}
-\item{g}{Per-capita GDP, in thousands of constant 2010 U.S. dollars per person.}
+\item{g}{Per-capita GDP, in thousands of constant 2015 U.S. dollars per person.}
 \item{e}{Energy intensity of the economy, in quads per trillion dollars.}
 \item{f}{Emissions intensity of the energy supply, in million metric tons
 per quad.}

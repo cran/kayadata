@@ -29,7 +29,7 @@ specified:
 \item{region}{The name of the country or region}
 \item{year}{The year}
 \item{P}{Population, in billions}
-\item{G}{Gross domestic product, in trillions of constant 2010 U.S.
+\item{G}{Gross domestic product, in trillions of constant 2015 U.S.
 dollars.}
 \item{E}{Total primary energy consumption, in quads}
 \item{F}{CO2 emissions from fossil fuel consumption, in millions of metric
@@ -49,8 +49,10 @@ Get Kaya data for one or more countries or regions
 \details{
 Units for \emph{G}, \emph{g}, \emph{e}, and \emph{ef} depend on whether the data is
 requested in MER or PPP dollars:
-For MER, dollars are constant 2010 U.S.
-dollars. For PPP, dollars are constant 2011 international dollars.\preformatted{     _P_ and MER values for GDP and related quantities are available
+For MER, dollars are constant 2015 U.S.
+dollars. For PPP, dollars are constant 2017 international dollars.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{     _P_ and MER values for GDP and related quantities are available
      from 1960 onward.
 
      PPP values for GDP and related quantities are only available from
@@ -61,7 +63,7 @@ dollars. For PPP, dollars are constant 2011 international dollars.\preformatted{
 
      Note that emissions (_F_, _f_, and _ef_) are reported as millions
      of metric tons of carbon dioxide, not carbon.
-}
+}\if{html}{\out{</div>}}
 }
 \examples{
 get_kaya_data("Brazil")

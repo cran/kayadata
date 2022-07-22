@@ -1,3 +1,9 @@
+# kayadata 1.2.0
+
+* Update data through 2021:
+  * The 2022 release of BP Energy Statistics.
+  * The latest population and GDP data from the World Bank.
+
 # kayadata 1.1.0
 
 * Add optional arguments to `plot_kaya()` to allow the user to specify the 

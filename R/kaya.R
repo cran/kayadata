@@ -63,7 +63,7 @@ kaya_region_list <- function() {
 #'   \item{region}{The name of the country or region}
 #'   \item{year}{The year}
 #'   \item{P}{Population, in billions}
-#'   \item{G}{Gross domestic product, in trillions of constant 2010 U.S.
+#'   \item{G}{Gross domestic product, in trillions of constant 2015 U.S.
 #'            dollars.}
 #'   \item{E}{Total primary energy consumption, in quads}
 #'   \item{F}{CO2 emissions from fossil fuel consumption, in millions of metric
@@ -79,8 +79,8 @@ kaya_region_list <- function() {
 #'
 #' @details Units for _G_, _g_, _e_, and _ef_ depend on whether the data is
 #'          requested in MER or PPP dollars:
-#'          For MER, dollars are constant 2010 U.S.
-#'          dollars. For PPP, dollars are constant 2011 international dollars.
+#'          For MER, dollars are constant 2015 U.S.
+#'          dollars. For PPP, dollars are constant 2017 international dollars.
 #'
 #'          _P_ and MER values for GDP and related quantities are available
 #'          from 1960 onward.
@@ -248,12 +248,12 @@ get_top_down_trends <- function(region_name, quiet = FALSE,
 #' \describe{
 #'   \item{region}{The name of the country or region}
 #'   \item{P}{Population, in billions}
-#'   \item{G}{Gross domestic product, in trillions of constant 2010 U.S.
+#'   \item{G}{Gross domestic product, in trillions of constant 2015 U.S.
 #'            dollars.}
 #'   \item{E}{Total primary energy consumption, in quads}
 #'   \item{F}{CO2 emissions from fossil fuel consumption, in millions of metric
 #'            tons }
-#'   \item{g}{Per-capita GDP, in thousands of constant 2010 U.S. dollars per
+#'   \item{g}{Per-capita GDP, in thousands of constant 2015 U.S. dollars per
 #'            person.}
 #'   \item{e}{Energy intensity of the economy, in quads per trillion dollars.}
 #'   \item{f}{Emissions intensity of the energy supply, in million metric tons
@@ -309,12 +309,12 @@ get_top_down_values <- function(region_name, quiet = FALSE,
 #'   \item{region}{The name of the country or region}
 #'   \item{year}{The year}
 #'   \item{P}{Population, in billions}
-#'   \item{G}{Gross domestic product, in trillions of constant 2010 U.S.
+#'   \item{G}{Gross domestic product, in trillions of constant 2015 U.S.
 #'            dollars.}
 #'   \item{E}{Total primary energy consumption, in quads}
 #'   \item{F}{CO2 emissions from fossil fuel consumption, in millions of metric
 #'            tons }
-#'   \item{g}{Per-capita GDP, in thousands of constant 2010 U.S. dollars per
+#'   \item{g}{Per-capita GDP, in thousands of constant 2015 U.S. dollars per
 #'            person.}
 #'   \item{e}{Energy intensity of the economy, in quads per trillion dollars.}
 #'   \item{f}{Emissions intensity of the energy supply, in million metric tons
