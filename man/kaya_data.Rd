@@ -5,7 +5,7 @@
 \alias{kaya_data}
 \title{Kaya identity data for many countries and regions}
 \format{
-A tibble containing 5160 rows and 14 variables:
+A tibble containing 5292 rows and 14 variables:
 \describe{
 \item{region}{Country or region name}
 \item{region_code}{Three-letter country or region code}
@@ -30,7 +30,7 @@ in trillions of constant 2015 U.S. dollars}
 \source{
 \url{https://data.worldbank.org/indicator/SP.POP.TOTL},
 \url{https://data.worldbank.org/indicator/NY.GDP.MKTP.KD}, and
-\url{https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy/downloads.html}
+\url{https://www.energyinst.org/statistical-review}
 }
 \usage{
 kaya_data
@@ -40,6 +40,6 @@ A dataset containing Kaya identity parameters
 P, G, E, F, g, e, f, and ef for many countries
 }
 \seealso{
-regions
+\link{regions}, \code{\link[=get_kaya_data]{get_kaya_data()}}
 }
 \keyword{datasets}

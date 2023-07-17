@@ -9,7 +9,7 @@ Problems with aggregate regional data
 \details{
 The World Bank is missing GDP data for a number of nations, such as Syria
 and Taiwan.  Because of this and the incommensurability between the regions
-used for aggregate statistics in the World Bank data and the BP data,
+used for aggregate statistics in the World Bank and Energy Institute data,
 aggregate regional data (e.g., for the Middle East and Africa) should be
 treated with caution.
 This problem does not hold for individual nations, where missing data

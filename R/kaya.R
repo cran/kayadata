@@ -18,7 +18,7 @@ globalVariables(c("fuel_mix", "kaya_data", "region", "region_code",
 #'
 #' @return The corresponding country or region name, or NULL if there is no
 #'         such country or region
-#' @seealso regions
+#' @seealso [regions]
 #' @keywords internal
 #' @importFrom magrittr %>% %$%
 lookup_region_code <- function(region_code, data = kayadata::kaya_data,
@@ -39,7 +39,7 @@ lookup_region_code <- function(region_code, data = kayadata::kaya_data,
 #' Get a list of countries in the Kaya data
 #'
 #' @return a vector of country and region names
-#' @seealso regions
+#' @seealso [regions]
 #' @export
 kaya_region_list <- function() {
   levels(kayadata::kaya_data$region) %>%
@@ -94,7 +94,7 @@ kaya_region_list <- function() {
 #'          Note that emissions (_F_, _f_, and _ef_) are reported as millions
 #'          of metric tons of carbon dioxide, not carbon.
 #'
-#' @seealso regions
+#' @seealso [regions]
 #'
 #' @examples
 #' get_kaya_data("Brazil")
@@ -153,7 +153,12 @@ get_kaya_data <- function(region_name, gdp = c("MER", "PPP"), quiet = FALSE,
 #'     fuel}
 #' }
 #'
-#' @seealso regions
+#' @note In the latest data from the Energy Institute, there are small
+#'   discrepancies between the sums of energy for each fuel and the totals,
+#'   in both `quads` and `frac`, for Hong Kong and Sri Lanka, as described
+#'   in the documentation for [fuel_mix].
+#'
+#' @seealso [regions], [fuel_mix]
 #'
 #' @examples
 #' get_fuel_mix("United States")
@@ -206,7 +211,7 @@ get_fuel_mix <- function(region_name, collapse_renewables = TRUE,
 #' @return a tibble of trends for _P_, _G_, _E_, _F_, _g_, _e_, _f_, and _ef_
 #'   for each country or region in percent per year.
 #'
-#' @seealso regions
+#' @seealso [regions]
 #'
 #' @examples
 #' get_top_down_trends("Spain")
@@ -262,7 +267,7 @@ get_top_down_trends <- function(region_name, quiet = FALSE,
 #'             million dollars of GDP.}
 #' }
 #'
-#' @seealso regions
+#' @seealso [regions]
 #'
 #' @examples
 #' get_top_down_values("New Zealand")
@@ -323,7 +328,7 @@ get_top_down_values <- function(region_name, quiet = FALSE,
 #'             million dollars of GDP.}
 #' }
 #'
-#' @seealso regions
+#' @seealso [regions]
 #'
 #' @examples
 #' project_top_down("China", 2037)
@@ -374,7 +379,7 @@ project_top_down <- function(region_name, year, quiet = FALSE,
 #' @return a tibble of values for emissions factors, in million metric
 #'         tons of carbon dioxide per quad of energy.
 #'
-#' @seealso regions
+#' @seealso [regions]
 #'
 #' @examples
 #' e_fac <- emissions_factors()

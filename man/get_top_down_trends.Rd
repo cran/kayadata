@@ -31,5 +31,5 @@ get_top_down_trends("Spain")
 get_top_down_trends(region_code = "RUS")
 }
 \seealso{
-regions
+\link{regions}
 }

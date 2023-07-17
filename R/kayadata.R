@@ -54,8 +54,8 @@
 #' data frame.
 #'
 #' The package uses data on energy consumption and fossil-fuel CO2 emissions
-#' from the
-#' [2021 BP Statistical Review of World Energy](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html)
+#' from the [Energy Institute](https://www.energyinst.org/)'s
+#' [2023 Statistical Review of World Energy](https://www.energyinst.org/statistical-review/home)
 #'
 #' @section License:
 #'
@@ -87,7 +87,7 @@ NULL
 #'
 #' The World Bank is missing GDP data for a number of nations, such as Syria
 #' and Taiwan.  Because of this and the incommensurability between the regions
-#' used for aggregate statistics in the World Bank data and the BP data,
+#' used for aggregate statistics in the World Bank and Energy Institute data,
 #' aggregate regional data (e.g., for the Middle East and Africa) should be
 #' treated with caution.
 #

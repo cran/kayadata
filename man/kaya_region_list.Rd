@@ -13,5 +13,5 @@ a vector of country and region names
 Get a list of countries in the Kaya data
 }
 \seealso{
-regions
+\link{regions}
 }

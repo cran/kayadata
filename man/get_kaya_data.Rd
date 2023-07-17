@@ -72,5 +72,5 @@ get_kaya_data(region_name = "United States")
 get_kaya_data(region_code = "MYS")
 }
 \seealso{
-regions
+\link{regions}
 }

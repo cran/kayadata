@@ -21,7 +21,7 @@ energy consumption from the fuel}
 }
 }
 \source{
-\url{https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy/downloads.html}
+\url{https://www.energyinst.org/statistical-review/resources-and-data-downloads}
 }
 \usage{
 fuel_mix
@@ -31,7 +31,13 @@ A dataset containing the fuel mix of how many quads and what fraction of
 total primary energy supply comes from coal, gas, oil, nuclear, and
 renewable sources.
 }
+\note{
+The 2023 data from the Energy Institute has inconsistencies in the fuel
+mix for Hong Kong and Sri Lanka: The percentages add up to 98.7\% and
+102.9\%, respectively. The sums of energy in quads are off by
+-0.095 and +0.095 quads, respectively, from the total energy figure.
+}
 \seealso{
-regions
+\link{regions}, \code{\link[=get_fuel_mix]{get_fuel_mix()}}
 }
 \keyword{datasets}

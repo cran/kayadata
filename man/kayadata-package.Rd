@@ -30,8 +30,8 @@ available as \code{G_ppp} but using these would require re-calculating
 data frame.
 
 The package uses data on energy consumption and fossil-fuel CO2 emissions
-from the
-\href{https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html}{2021 BP Statistical Review of World Energy}
+from the \href{https://www.energyinst.org/}{Energy Institute}'s
+\href{https://www.energyinst.org/statistical-review/home}{2023 Statistical Review of World Energy}
 }
 \section{License}{
 

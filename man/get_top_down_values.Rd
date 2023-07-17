@@ -47,5 +47,5 @@ get_top_down_values(region_code = "PAK")
 
 }
 \seealso{
-regions
+\link{regions}
 }

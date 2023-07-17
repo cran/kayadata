@@ -41,11 +41,17 @@ fuel}
 \description{
 Get fuel mix for one or more countries or regions
 }
+\note{
+In the latest data from the Energy Institute, there are small
+discrepancies between the sums of energy for each fuel and the totals,
+in both \code{quads} and \code{frac}, for Hong Kong and Sri Lanka, as described
+in the documentation for \link{fuel_mix}.
+}
 \examples{
 get_fuel_mix("United States")
 get_fuel_mix("World", collapse_renewables = FALSE)
 get_fuel_mix(region_code = "LCN")
 }
 \seealso{
-regions
+\link{regions}, \link{fuel_mix}
 }

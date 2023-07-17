@@ -1,3 +1,14 @@
+# kayadata 1.3.0
+
+* Update data through 2022:
+  * The 2023 release of Energy Statistics (which moved from BP to the 
+    Energy Institute)
+    * The new data has some small discrepancies (around 2--3 percent) between 
+      the sum of primary energy consumption by fuel and the total primary energy 
+      consumption for Hong Kong and Sri Lanka. See documentation for
+      `fuel_mix` for details.
+  * The latest population and GDP data from the World Bank.
+
 # kayadata 1.2.0
 
 * Update data through 2021:

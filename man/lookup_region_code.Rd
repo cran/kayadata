@@ -21,6 +21,6 @@ such country or region
 Look up country or region name from code
 }
 \seealso{
-regions
+\link{regions}
 }
 \keyword{internal}

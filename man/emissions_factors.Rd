@@ -22,5 +22,5 @@ e_fac <- emissions_factors()
 e_fac
 }
 \seealso{
-regions
+\link{regions}
 }
