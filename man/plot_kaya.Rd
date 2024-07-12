@@ -5,7 +5,7 @@
 \title{Plot Kaya-identity variable}
 \usage{
 plot_kaya(
-  kaya_data,
+  data,
   variable,
   start_year = NA,
   stop_year = NA,
@@ -31,7 +31,8 @@ plot_kaya(
 )
 }
 \arguments{
-\item{kaya_data}{A tibble with Kaya-identity data}
+\item{data}{A tibble with Kaya-identity data or the name of a region or a
+region code.}
 
 \item{variable}{The name of the variable to plot (character)}
 
@@ -130,6 +131,8 @@ plot_kaya(uk, "e", log_scale = TRUE, trend_line = TRUE,
           pre_line_size = 0.5, post_line_size = 0.5,
           trend_line_size = 1.5,
           pre_point_size = 2, post_point_size = 2, in_range_point_size = 3)
+plot_kaya("United Kingdom")
+plot_kaya("GBR")
 }
 
 world <- get_kaya_data("World")

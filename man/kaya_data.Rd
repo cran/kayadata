@@ -30,7 +30,7 @@ in trillions of constant 2015 U.S. dollars}
 \source{
 \url{https://data.worldbank.org/indicator/SP.POP.TOTL},
 \url{https://data.worldbank.org/indicator/NY.GDP.MKTP.KD}, and
-\url{https://www.energyinst.org/statistical-review}
+\url{https://www.energyinst.org/statistical-review/resources-and-data-downloads}
 }
 \usage{
 kaya_data

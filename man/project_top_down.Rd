@@ -45,7 +45,7 @@ or regions for a given year
 }
 \examples{
 project_top_down("China", 2037)
-project_top_down(region_code = "VNM", year = 2043)
+project_top_down(region_code = "CHE", year = 2043)
 }
 \seealso{
 \link{regions}

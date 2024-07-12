@@ -49,5 +49,7 @@ plot_fuel_mix(usa_fuel, collapse_renewables = FALSE,
               colors = c(Coal = "black", "Natural Gas" = "gray60",
                          Oil = "gray30", Nuclear = "forestgreen",
                          Hydro = "royalblue", Renewables="palegreen"))
+plot_fuel_mix("United States")
+plot_fuel_mix("USA")
 
 }

@@ -4,7 +4,8 @@ globalVariables(c("in_range", "fuel", "quads", "frac", "label",
 
 #' Plot Kaya-identity variable
 #'
-#' @param kaya_data A tibble with Kaya-identity data
+#' @param data A tibble with Kaya-identity data or the name of a region or a
+#'   region code.
 #' @param variable The name of the variable to plot (character)
 #' @param start_year The year to start highlighting the data (should correspond
 #' to the beginning of the trend calculation). Set to `NULL` to turn off
@@ -77,13 +78,15 @@ globalVariables(c("in_range", "fuel", "quads", "frac", "label",
 #'           pre_line_size = 0.5, post_line_size = 0.5,
 #'           trend_line_size = 1.5,
 #'           pre_point_size = 2, post_point_size = 2, in_range_point_size = 3)
+#' plot_kaya("United Kingdom")
+#' plot_kaya("GBR")
 #' }
 #'
 #' world <- get_kaya_data("World")
 #' plot_kaya(world, "g", 1982, log_scale = TRUE, trend_line = TRUE)
 #' @export
 #' @importFrom magrittr %>%
-plot_kaya <- function(kaya_data, variable,
+plot_kaya <- function(data, variable,
                       start_year = NA, stop_year = NA,
                       y_lab = NULL,
                       log_scale = FALSE, trend_line = FALSE,
@@ -96,6 +99,21 @@ plot_kaya <- function(kaya_data, variable,
                       trend_line_size = NULL,
                       point_sizes = NULL, pre_point_size = NULL,
                       post_point_size = NULL, in_range_point_size = NULL) {
+  if (is.character(data)) {
+    if (length(data) != 1) {
+      stop("Can't plot kaya data for multiple regions.")
+    }
+    if (data %in% kaya_region_list()) {
+      data <- get_kaya_data(region_name = data, quiet = TRUE)
+    } else if (data %in% kayadata::kaya_data$region_code) {
+      data <- get_kaya_data(region_code = data, quiet = TRUE)
+    } else {
+      stop("No region or region code ", data)
+    }
+  }
+
+
+
   labels <- c(P =  "Population (billions)",
               G =  "Gross Domestic Product ($ trillion)",
               E =  "Energy consumption (quads)",
@@ -118,7 +136,7 @@ plot_kaya <- function(kaya_data, variable,
   if (! is.null(trend_color)) colors['TREND'] <- trend_color
 
   if (is.null(line_sizes)) {
-    line_sizes = c("IN-RANGE" = 1,
+    line_sizes = c("IN-RANGE" = 1.5,
                "PRE" = 1,
                "POST" = 1,
                "TREND" = 1)
@@ -138,7 +156,8 @@ plot_kaya <- function(kaya_data, variable,
   if (! is.null(post_point_size)) point_sizes['POST'] <- post_point_size
   if (! is.null(in_range_point_size)) point_sizes['IN-RANGE'] <- in_range_point_size
 
-  point_sizes = set_names(point_sizes, nm = str_c(names(point_sizes), "_PT"))
+  point_sizes = purrr::set_names(point_sizes,
+                                 nm = stringr::str_c(names(point_sizes), "_PT"))
 
   if (is.null(y_lab)) y_lab <- labels[variable]
   if (is.null(start_year) || is.null(stop_year)) {
@@ -146,12 +165,12 @@ plot_kaya <- function(kaya_data, variable,
     stop_year <- NULL
   } else {
     if (is.na(start_year)) start_year <- 1980
-    if (is.na(stop_year)) stop_year <-  max(kaya_data$year)
+    if (is.na(stop_year)) stop_year <-  max(data$year)
   }
 
   se <- FALSE
   if (is.character(trend_line)) {
-    trend_line <- str_to_upper(trend_line) %>% str_trim()
+    trend_line <- stringr::str_to_upper(trend_line) %>% stringr::str_trim()
     if (trend_line %in% c("T", "TRUE")) {
       trend_line <- TRUE
       se <- FALSE
@@ -177,26 +196,26 @@ plot_kaya <- function(kaya_data, variable,
 
   if (!any(is.null(start_year), is.null(stop_year))) {
     df <- dplyr::bind_rows(
-      kaya_data %>% dplyr::filter(year <= start_year) %>%
+      data %>% dplyr::filter(year <= start_year) %>%
         dplyr::mutate(in_range = "PRE", pt_in_range = "PRE"),
-      kaya_data %>% dplyr::filter(year >= stop_year) %>%
+      data %>% dplyr::filter(year >= stop_year) %>%
         dplyr::mutate(in_range = "POST"),
-      kaya_data %>%
-        dplyr::filter(between(year, start_year, stop_year)) %>%
+      data %>%
+        dplyr::filter(dplyr::between(year, start_year, stop_year)) %>%
         dplyr::mutate(in_range = "IN-RANGE")
     )
   } else {
-    df <- kaya_data %>% dplyr::mutate(in_range = "IN-RANGE")
+    df <- data %>% dplyr::mutate(in_range = "IN-RANGE")
   }
 
   variable <- sym(variable)
   p <- ggplot2::ggplot(df, aes(x = year, y = !!variable, color = in_range,
-                               size = in_range))
+                               size = in_range, linewidth = in_range))
   p <- p +
     ggplot2::geom_line(na.rm = TRUE)
 
   if (points) {
-    p <- p + ggplot2::geom_point(aes(size = str_c(in_range, "_PT")),
+    p <- p + ggplot2::geom_point(aes(size = stringr::str_c(in_range, "_PT")),
                                  na.rm = TRUE)
   }
   p <- p + color_scale + legend
@@ -209,11 +228,13 @@ plot_kaya <- function(kaya_data, variable,
     p <- p + ggplot2::geom_smooth(method = "lm", formula = y ~ x,
                                   data = dplyr::filter(df, in_range == "IN-RANGE"),
                          na.rm = TRUE, se = se,
-                         mapping = aes(color = "TREND", size = "TREND"))
+                         mapping = aes(color = "TREND", linewidth = "TREND"))
   }
 
   p <- p +
-    scale_size_manual( values = c(line_sizes, point_sizes),
+    scale_size_manual( values = point_sizes,
+                       guide = "none") +
+    scale_linewidth_manual(values = line_sizes,
                        guide = "none") +
     ggplot2::labs(x = "Year", y = y_lab) +
     ggplot2::theme_bw(base_size = font_size) +
@@ -257,12 +278,29 @@ plot_kaya <- function(kaya_data, variable,
 #'               colors = c(Coal = "black", "Natural Gas" = "gray60",
 #'                          Oil = "gray30", Nuclear = "forestgreen",
 #'                          Hydro = "royalblue", Renewables="palegreen"))
+#' plot_fuel_mix("United States")
+#' plot_fuel_mix("USA")
 #'
 #' @export
 plot_fuel_mix <- function(fuel_mix, collapse_renewables = TRUE, title = NULL,
                           colors = NULL, font_size = 20) {
+  if (is.character(fuel_mix)) {
+    if (length(fuel_mix) != 1) {
+      stop("Can't plot fuel mix for multiple regions.")
+    }
+    if (fuel_mix %in% kaya_region_list()) {
+      fuel_mix <- get_fuel_mix(region_name = fuel_mix, quiet = TRUE,
+                               collapse_renewables = collapse_renewables)
+    } else if (fuel_mix %in% kayadata::kaya_data$region_code) {
+      fuel_mix <- get_fuel_mix(region_code = fuel_mix, quiet = TRUE,
+                               collapse_renewables = collapse_renewables)
+    } else {
+      stop("No region or region code ", fuel_mix)
+    }
+  }
+
   if (is.null(title) || title == TRUE) {
-    title <- fuel_mix$region %>% unique() %>% str_c(collapse = ", ")
+    title <- fuel_mix$region %>% unique() %>% stringr::str_c(collapse = ", ")
   } else if (!is.character(title)) {
     title <- NULL
   }
@@ -276,18 +314,19 @@ plot_fuel_mix <- function(fuel_mix, collapse_renewables = TRUE, title = NULL,
 
   if (collapse_renewables) {
     fuel_mix <- fuel_mix %>%
-      dplyr::mutate(fuel = forcats::fct_recode(fuel, Renewables = "Hydro"))
+      dplyr::mutate(fuel = forcats::fct_recode(.data$fuel, Renewables = "Hydro"))
     colors <- colors[names(colors) != "Hydro"]
   }
   fuel_mix <- fuel_mix %>% dplyr::group_by(fuel) %>%
     dplyr::summarize(quads = sum(quads), frac = sum(frac), .groups = "drop")
   fd <- fuel_mix %>%
     dplyr::arrange(fuel) %>%
-    dplyr::mutate(qmin = cumsum(lag(quads, default = 0)), qmax = cumsum(quads))
+    dplyr::mutate(qmin = cumsum(dplyr::lag(quads, default = 0)),
+                  qmax = cumsum(quads))
   labels <- fd %>% dplyr::mutate(label = paste0(fuel, ": ", round(quads, 2),
                                          " quads (", scales::percent(frac, 0.1),
                                          ")")) %>%
-    dplyr::arrange(fuel) %>% dplyr::select(fuel, label) %>%
+    dplyr::arrange(fuel) %>% dplyr::select("fuel", "label") %>%
     tidyr::spread(key = fuel, value = label) %>% unlist()
   if (FALSE) {
     message(paste0(levels(fd$fuel), collapse = ", "))

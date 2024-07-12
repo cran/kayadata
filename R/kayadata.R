@@ -11,7 +11,6 @@
 
 #' kayadata package
 #'
-#' @docType package
 #' @name kayadata-package
 #' @references
 #' Kaya, Yoichi and Keiichi Yokobori, _Environment, Energy, and Economy:
@@ -55,7 +54,7 @@
 #'
 #' The package uses data on energy consumption and fossil-fuel CO2 emissions
 #' from the [Energy Institute](https://www.energyinst.org/)'s
-#' [2023 Statistical Review of World Energy](https://www.energyinst.org/statistical-review/home)
+#' [2024 Statistical Review of World Energy](https://www.energyinst.org/statistical-review/home)
 #'
 #' @section License:
 #'
@@ -69,17 +68,9 @@
 #'
 #'
 #' @importFrom magrittr %>%
-#' @importFrom dplyr distinct filter mutate select summarize summarize_at
-#' @importFrom dplyr slice_max
-#' @importFrom forcats fct_recode
-#' @import dplyr
 #' @import ggplot2
-#' @importFrom stats approx
-#' @importFrom tidyr gather spread
-#' @importFrom stringr str_to_upper str_c str_trim
-#' @importFrom purrr set_names
 #'
-NULL
+"_PACKAGE"
 
 #' Aggregate regional data
 #'

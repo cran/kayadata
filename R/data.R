@@ -27,7 +27,7 @@
 #' @seealso [regions], [get_kaya_data()]
 #' @source <https://data.worldbank.org/indicator/SP.POP.TOTL>,
 #' <https://data.worldbank.org/indicator/NY.GDP.MKTP.KD>, and
-#' <https://www.energyinst.org/statistical-review>
+#' <https://www.energyinst.org/statistical-review/resources-and-data-downloads>
 "kaya_data"
 
 
@@ -52,7 +52,9 @@
 #'              energy consumption from the fuel}
 #' }
 #'
-#' @note The 2023 data from the Energy Institute has inconsistencies in the fuel
+#' @note The data for 2022,
+#' from the 2023 release of the Energy Institute's Statistical Review,
+#'  has inconsistencies in the fuel
 #' mix for Hong Kong and Sri Lanka: The percentages add up to 98.7% and
 #' 102.9%, respectively. The sums of energy in quads are off by
 #' -0.095 and +0.095 quads, respectively, from the total energy figure.
